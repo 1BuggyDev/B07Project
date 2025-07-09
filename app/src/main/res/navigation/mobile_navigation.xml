@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.b07_project21.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_support"
+        android:name="com.example.b07_project21.ui.support.SupportFragment"
+        android:label="@string/support_connect"
+        tools:layout="@layout/fragment_support" />
+    <fragment
+        android:id="@+id/nav_safety"
+        android:name="com.example.b07_project21.ui.safety_plan.SafetyFragment"
+        android:label="@string/safety_plan"
+        tools:layout="@layout/fragment_safety" />
+    <fragment
+        android:id="@+id/nav_questionnaire"
+        android:name="com.example.b07_project21.ui.questionnaire.QuestionnaireFragment"
+        android:label="@string/questionnaire"
+        tools:layout="@layout/fragment_questionnaire" />
+    <fragment
+        android:id="@+id/nav_emergency"
+        android:name="com.example.b07_project21.ui.emergency_info.EmergencyFragment"
+        android:label="@string/emergency_info"
+        tools:layout="@layout/fragment_emergency" />
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.example.b07_project21.ui.notification.NotificationFragment"
+        android:label="@string/notifications"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/nav_exit"
+        android:name="com.example.b07_project21.ui.exit.ExitFragment"
+        android:label="@string/exit"
+        tools:layout="@layout/fragment_exit" />
+</navigation>
