@@ -14,7 +14,7 @@
 
     <!--  Add Exit Logic Here  -->
     <fragment
-        android:id="@+id/navigation_exit"
+        android:id="@+id/nav_exit"
         android:name="com.example.b07_project21.ui.exit.ExitFragment"
         android:label="@string/exit"
         tools:layout="@layout/fragment_exit" />
