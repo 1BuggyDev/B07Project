@@ -1,13 +1,33 @@
 {
   "project_info": {
-    "project_number": "103450168850",
-    "project_id": "b07-demo-summer-2024",
-    "storage_bucket": "b07-demo-summer-2024.appspot.com"
+    "project_number": "716652989550",
+    "firebase_url": "https://cscb07project-8e5e3-default-rtdb.firebaseio.com",
+    "project_id": "cscb07project-8e5e3",
+    "storage_bucket": "cscb07project-8e5e3.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:103450168850:android:18be49669e0000df0552cb",
+        "mobilesdk_app_id": "1:716652989550:android:fb187f38e18210d2e4aa7f",
+        "android_client_info": {
+          "package_name": "com.example.b07_project21"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0sVsuWGR92mVfi7I6xmgZBoOO9SDTQg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716652989550:android:c292a58ab503eb67e4aa7f",
         "android_client_info": {
           "package_name": "com.example.b07demosummer2024"
         }
@@ -15,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCNPIMxlsDkuYk5s1-Uycc9s8Hqz2YKIDs"
+          "current_key": "AIzaSyD0sVsuWGR92mVfi7I6xmgZBoOO9SDTQg0"
         }
       ],
       "services": {

@@ -1,19 +1,23 @@
 <resources>
-    <string name="app_name">B07 Demo Summer 2024</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="delete_item">Delete Item</string>
-    <string name="add_item">Add Item</string>
-    <string name="back">Back</string>
-    <string name="recyclerview">RecyclerView</string>
-    <string name="scroller">Scroller</string>
-    <string name="spinner">Spinner</string>
-    <string name="manage_items">Manage Items</string>
+    <string name="app_name">B07 Project 21</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
-    <string-array name="categories_array">
-        <item>Books</item>
-        <item>Movies</item>
-    </string-array>
+    <!-- Pages Titles -->
+    <string name="home">Home</string>string>
+    <string name="safety_plan">Safety Plan</string>string>
+    <string name="questionnaire">Questionnaire</string>string>
+    <string name="emergency_info">Emergency Information</string>string>
+    <string name="support_connect">Support Connection</string>string>
+    <string name="notifications">Notifications</string>string>
 
-
+    <!-- Bottom Buttons -->
+    <string name="exit">Exit App</string>string>
+    <string name="empty"> </string>string>
+    <string name="back">Back</string>string>
+    <string name="next">Next</string>string>
 </resources>
