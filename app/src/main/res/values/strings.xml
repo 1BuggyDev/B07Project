@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">B07_Skeleton_App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Pages Titles -->
+    <string name="home">Home</string>string>
+    <string name="safety_plan">Safety Plan</string>string>
+    <string name="questionnaire">Questionnaire</string>string>
+    <string name="emergency_info">Emergency Information</string>string>
+    <string name="support_connect">Support Connection</string>string>
+    <string name="notifications">Notifications</string>string>
+
+    <!-- Bottom Nav Bar -->
+    <string name="exit">Exit App</string>string>
+    <string name="empty"> </string>string>
+</resources>
