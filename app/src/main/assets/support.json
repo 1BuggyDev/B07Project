@@ -1,0 +1,33 @@
+{
+    "Toronto":
+    {
+        "Toronto Victim Services 24/7 Crisis Line": "416-808-7066",
+        "Find a Shelter": "https://www.torontocentralhealthline.ca/listServices.aspx?id=10714",
+        "Legal Aid Ontario": "https://www.legalaid.on.ca/services/domestic-abuse",
+        "Police (Non-Emergency)": "416-808-2222",
+        "Police (Emergency)": "911"
+    },
+    "Vancouver":
+    {
+        "VictimLinkBC 24/7 Helpline": "1-800-563-0808",
+        "Find a Shelter": "https://www.domesticshelters.org/help/bc/vancouver",
+        "Legal Aid BC": "https://legalaid.bc.ca",
+        "Police (Non-Emergency)": "604-717-3321",
+        "Police (Emergency)": "911"
+    },
+    "Edmonton":
+    {
+        "": "",
+        "a": ""
+    },
+    "Calgary":
+    {
+        "": "",
+        "a": ""
+    },
+    "Saskatoon":
+    {
+        "": "",
+        "a": ""
+    }
+}
