@@ -44,26 +44,32 @@ public class ExitFragment extends Fragment {
 
         final TextView textView = binding.textExit;
         exitViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        exitToGoogle();
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
 
-        // 1) Launch Google in the browser
-        Intent browser = new Intent(
+    private void exitToGoogle() {
+        // Launch Google in browser
+        Intent browserIntent = new Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("https://www.google.com")
         );
-        startActivity(browser);
-        // Kill the app
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            requireActivity().finishAndRemoveTask();
-        } else {
-            // fallback for older devices
-            requireActivity().finishAffinity();
-        }
+        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(browserIntent);
+
+        // Add small delay to ensure browser starts before killing app
+        new android.os.Handler().postDelayed(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                requireActivity().finishAndRemoveTask();
+            } else {
+                requireActivity().finishAffinity();
+            }
+        }, 100);
     }
 
     @Override
