@@ -17,6 +17,10 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.MissingResourceException;
 
+/**
+ * A class for managing user logins <br>
+ * See Guides/LoginManagement.txt for a guide on usage
+ */
 public class LoginManager {
     private LoginManager(){};
 

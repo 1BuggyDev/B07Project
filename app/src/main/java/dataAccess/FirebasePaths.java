@@ -22,11 +22,24 @@ class FirebasePaths {
         return getPath(null, user);
     }
 
+    /**
+     * Gets the reference path given the user and the remaining path
+     * @param user the current user
+     * @param path the rest of the path
+     * @return the new reference path
+     */
     protected static String getPath(FirebaseUser user, String path) {
         return getPath(user) + "/" + path;
     }
-    protected static String getPath(FirebaseUser user, String path, int count, File file) {
-        //return getPath(user, path) + "/" + String.valueOf(count) + "_" + file.getName();
+
+    /**
+     * Gets the storage reference path given the user, remaining path, and file
+     * @param user the current user
+     * @param path the rest of the path
+     * @param file the file the path the reference path is for
+     * @return the new reference path
+     */
+    protected static String getPath(FirebaseUser user, String path, File file) {
         return getPath(user, path) + "/" + file.getName();
     }
 

@@ -2,7 +2,6 @@ package dataAccess;
 
 import static dataAccess.FirebasePaths.getPath;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,6 @@ import com.google.firebase.database.GenericTypeIndicator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.MissingResourceException;
 
 /**
  * Class for accessing Firebase Realtime Database <br>
@@ -52,32 +50,6 @@ public class DatabaseAccess {
     public static boolean isDataInitialized() {
         return dataTree != null;
     }
-
-
-    /**
-     * Given a pin, tests if it is the correct pin for the account
-     * @param pin the pin to test
-     * @return true if the pin is correct, false otherwise
-     * @throws MissingResourceException if there is a missing pin or salt
-     * @throws Exception if an error occurred while attempting to hash the pin
-     */
-    /*public static boolean attemptLogin(String pin, Context context) throws MissingResourceException, Exception {
-        user = LoginManager.attemptLogin(pin, context);
-        if(user != null) {
-            ref = db.getReference(getPath(user));
-        }
-        return isUserSignedIn();
-    }*/
-
-    /**
-     * Given an email and password, login to Firebase db
-     * @param email the user's email
-     * @param password the user's password
-     * @param obj a class implementing the AccountListener interface to call onEmailLogin()
-     */
-    /*public static void attemptLogin(String email, String password, AccountListener obj) {
-        LoginManager.attemptLogin(email, password, obj);
-    }*/
 
     /**
      * Creates a GenericTypeIndicator to tell Firebase db how to format data into objects

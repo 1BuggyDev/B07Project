@@ -5,6 +5,9 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * A class that caches/stores the user's data to avoid reading from the database multiple times
+ */
 class DataTree {
     HashMap<String, String> answers;
     ArrayList<Document> documents;
@@ -21,6 +24,9 @@ class DataTree {
         initilizeObjects();
     }
 
+    /**
+     * Initializes null containers to empty
+     */
     private void initilizeObjects() {
         if(answers == null) {
             answers = new HashMap<String, String>();
@@ -67,13 +73,13 @@ class DataTree {
      *            For ANSWER, the key is a key for the Map
      *            Otherwise, the key is String.valueOf(Index)
      * @return the path to the files for a specific piece of data
-     *         null if type == ANSWER
+     *         null if type == ANSWER (Should not be used with ANSWER)
      */
     protected String getFilePath(infoType type, String key) {
         if(type == infoType.ANSWER) {
             return null;
         }
-        UserData obj = (UserData) ((ArrayList<?>)getData(type)).get(0);
+        UserData obj = (UserData) ((ArrayList<?>)getData(type)).get(Integer.parseInt(key));
         return obj.getFilePath();
     }
 
@@ -112,8 +118,6 @@ class DataTree {
      *            For ANSWER, the key is a key for the Map
      *            Otherwise, the key is String.valueOf(Index)
      * @param data the data to replace the old data
-     * Note that this does not check that the data is of a valid type
-     * It is your responsibility to verify the data is of a valid type
      */
     protected void updateData(infoType type, String key, Object data) {
         if(data == null) {

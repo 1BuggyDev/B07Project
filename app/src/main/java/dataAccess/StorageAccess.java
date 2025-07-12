@@ -2,7 +2,6 @@ package dataAccess;
 
 import static dataAccess.FirebasePaths.getPath;
 
-import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -23,7 +22,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.MissingResourceException;
 
 /**
  * Class for accessing Firebase Storage <br>
@@ -72,9 +70,8 @@ public class StorageAccess {
             @Override
             public void onComplete(@NonNull Task<ListResult> task) {
                 if(task.isSuccessful()) {
-                    int count = task.getResult().getItems().size();
                     Uri uploadFile = Uri.fromFile(file);
-                    StorageReference writeRef = storage.getReference(getPath(user, path, count, file));
+                    StorageReference writeRef = storage.getReference(getPath(user, path, file));
                     UploadTask uploadTask = writeRef.putFile(uploadFile);
                     if(obj == null) {
                         return;
