@@ -1,8 +1,6 @@
 package com.example.b07_project21;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
@@ -28,213 +27,194 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 public class ReminderListFragment extends Fragment {
-    // Firestore collection (using fake UID for now)
     private final CollectionReference col = FirebaseFirestore.getInstance()
             .collection("users")
             .document("devUser123")
             .collection("reminders");
-
     private final ReminderAdapter adapter = new ReminderAdapter();
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reminder_list, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View v, @Nullable Bundle saved) {
-        super.onViewCreated(v, saved);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupRecyclerView(view);
+        setupSwipeToDelete();
+        setupAdapterActions();
+        setupFirestoreListener();
+        setupFab(view);
+    }
 
-        // 1) RecyclerView + adapter
-        RecyclerView rv = v.findViewById(R.id.list);
+    private void setupRecyclerView(View root) {
+        RecyclerView rv = root.findViewById(R.id.list);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setAdapter(adapter);
+    }
 
-        // 2) Swipe to delete
+    private void setupSwipeToDelete() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
-                0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
-        ) {
+                0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override public boolean onMove(@NonNull RecyclerView rv,
                                             @NonNull RecyclerView.ViewHolder vh,
-                                            @NonNull RecyclerView.ViewHolder t) {
+                                            @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
             @Override public void onSwiped(@NonNull RecyclerView.ViewHolder vh, int dir) {
                 int pos = vh.getAdapterPosition();
                 Reminder r = adapter.getItemAt(pos);
-                // cancel alarm
                 ReminderScheduler.cancel(requireContext(), r);
-                // delete in Firestore
                 col.document(r.getId()).delete()
                         .addOnSuccessListener(a ->
-                                Toast.makeText(requireContext(),
-                                        "Reminder deleted",
-                                        Toast.LENGTH_SHORT).show()
-                        )
+                                Toast.makeText(requireContext(), "Reminder deleted", Toast.LENGTH_SHORT)
+                                        .show())
                         .addOnFailureListener(e -> {
                             adapter.notifyItemChanged(pos);
-                            Toast.makeText(requireContext(),
-                                    "Delete failed",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Delete failed", Toast.LENGTH_SHORT)
+                                    .show();
                         });
             }
-        }).attachToRecyclerView(rv);
+        }).attachToRecyclerView(
+                getView().findViewById(R.id.list)
+        );
+    }
 
-        // 3) Long-press to edit
+    private void setupAdapterActions() {
         adapter.setOnItemActionListener(new ReminderAdapter.OnItemActionListener() {
             @Override public void onEdit(Reminder r) {
-                // a) Date picker pre-set
-                MaterialDatePicker<Long> dp = MaterialDatePicker.Builder
-                        .datePicker()
-                        .setSelection(r.getTriggerAt())
-                        .build();
-                dp.addOnPositiveButtonClickListener(epoch -> {
-                    // b) Time picker pre-set
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTimeInMillis(r.getTriggerAt());
-                    MaterialTimePicker tp = new MaterialTimePicker.Builder()
-                            .setTimeFormat(TimeFormat.CLOCK_24H)
-                            .setHour(cal.get(Calendar.HOUR_OF_DAY))
-                            .setMinute(cal.get(Calendar.MINUTE))
-                            .build();
-                    tp.addOnPositiveButtonClickListener(t -> {
-                        // cancel old alarm
-                        ReminderScheduler.cancel(requireContext(), r);
-                        // update model
-                        cal.setTimeInMillis(epoch + 86400000);
-                        cal.set(Calendar.HOUR_OF_DAY, tp.getHour());
-                        cal.set(Calendar.MINUTE, tp.getMinute());
-                        cal.set(Calendar.SECOND, 0);
-
-                        long chosenTime = cal.getTimeInMillis();
-// 1) expired?
-                        if (chosenTime <= System.currentTimeMillis()) {
-                            Toast.makeText(requireContext(),
-                                            "Cannot set a reminder in the past", Toast.LENGTH_SHORT)
-                                    .show();
-                            return;
-                        }
-// 2) duplicate?
-                        for (Reminder existing : adapter.getCurrentList()) {
-                            if (existing.getTriggerAt() == chosenTime) {
-                                Toast.makeText(requireContext(),
-                                                "A reminder at that exact time already exists", Toast.LENGTH_SHORT)
-                                        .show();
-                                return;
-                            }
-                        }
-
-                        r.setTriggerAt(cal.getTimeInMillis());
-                        // persist & reschedule
-                        col.document(r.getId())
-                                .update("triggerAt", r.getTriggerAt())
-                                .addOnSuccessListener(a -> {
-                                    ReminderScheduler.schedule(requireContext(), r);
-                                    Toast.makeText(requireContext(),
-                                            "Reminder updated",
-                                            Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(requireContext(),
-                                            "Update failed",
-                                            Toast.LENGTH_SHORT).show();
-                                });
-                    });
-                    tp.show(getParentFragmentManager(), "time");
-                });
-                dp.show(getParentFragmentManager(), "date");
+                pickDateTime(r.getTriggerAt(), newTime -> handleEdit(r, newTime));
             }
-
             @Override public void onDelete(Reminder r) {
-                // alternative delete trigger (besides swipe)
                 ReminderScheduler.cancel(requireContext(), r);
                 col.document(r.getId()).delete();
             }
         });
+    }
 
-        // 4) Real-time listener
+    private void setupFirestoreListener() {
         col.orderBy("triggerAt", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snaps,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Toast.makeText(requireContext(),
-                                    "Load failed",
-                                    Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        List<Reminder> list = new ArrayList<>();
-                        for (DocumentSnapshot ds : snaps.getDocuments()) {
-                            Reminder r = ds.toObject(Reminder.class);
-                            if (r != null) list.add(r);
-                        }
-                        adapter.submitList(list);
-                        // force RecyclerView to re-bind everything (including moved items)
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-
-        // 5) FAB → Add new reminder
-        v.findViewById(R.id.fab_add).setOnClickListener(x -> {
-            MaterialDatePicker<Long> dp = MaterialDatePicker.Builder
-                    .datePicker().build();
-            dp.addOnPositiveButtonClickListener(epoch -> {
-                MaterialTimePicker tp = new MaterialTimePicker.Builder()
-                        .setTimeFormat(TimeFormat.CLOCK_24H)
-                        .build();
-                tp.addOnPositiveButtonClickListener(t -> {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTimeInMillis(epoch + 86400000);
-                    cal.set(Calendar.HOUR_OF_DAY, tp.getHour());
-                    cal.set(Calendar.MINUTE, tp.getMinute());
-                    cal.set(Calendar.SECOND, 0);
-
-                    long chosenTime = cal.getTimeInMillis();
-// 1) expired?
-                    if (chosenTime <= System.currentTimeMillis()) {
-                        Toast.makeText(requireContext(),
-                                        "Cannot set a reminder in the past", Toast.LENGTH_SHORT)
-                                .show();
+                .addSnapshotListener((snaps, e) -> {
+                    if (e != null) {
+                        Toast.makeText(requireContext(), "Load failed", Toast.LENGTH_SHORT).show();
                         return;
                     }
-// 2) duplicate?
-                    for (Reminder existing : adapter.getCurrentList()) {
-                        if (existing.getTriggerAt() == chosenTime) {
-                            Toast.makeText(requireContext(),
-                                            "A reminder at that exact time already exists", Toast.LENGTH_SHORT)
-                                    .show();
-                            return;
-                        }
+                    List<Reminder> list = new ArrayList<>();
+                    for (DocumentSnapshot ds : snaps.getDocuments()) {
+                        Reminder r = ds.toObject(Reminder.class);
+                        if (r != null) list.add(r);
                     }
-
-
-                    Reminder r = new Reminder(
-                            UUID.randomUUID().toString(),
-                            cal.getTimeInMillis()
-                    );
-                    col.document(r.getId()).set(r)
-                            .addOnSuccessListener(a -> {
-                                ReminderScheduler.schedule(requireContext(), r);
-                                Toast.makeText(requireContext(),
-                                        "Reminder saved",
-                                        Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(requireContext(),
-                                        "Save failed",
-                                        Toast.LENGTH_SHORT).show();
-                            });
+                    adapter.submitList(list);
+                    adapter.notifyDataSetChanged(); // ensure rebind
                 });
-                tp.show(getParentFragmentManager(), "time");
+    }
+
+    private void setupFab(View root) {
+        root.findViewById(R.id.fab_add).setOnClickListener(v ->
+                pickDateTime(System.currentTimeMillis(), this::handleAdd)
+        );
+    }
+
+    /**
+     * Opens date & time pickers, applies timezone correction, and returns timestamp.
+     */
+    private void pickDateTime(long initialEpoch, DateTimeCallback cb) {
+        MaterialDatePicker<Long> dp = MaterialDatePicker.Builder.datePicker()
+                .setSelection(initialEpoch)
+                .build();
+        dp.addOnPositiveButtonClickListener(epoch -> {
+            long localMid = epoch - TimeZone.getDefault().getOffset(epoch);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(localMid);
+
+            MaterialTimePicker tp = new MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_24H)
+                    .setHour(cal.get(Calendar.HOUR_OF_DAY))
+                    .setMinute(cal.get(Calendar.MINUTE))
+                    .build();
+            tp.addOnPositiveButtonClickListener(t -> {
+                cal.set(Calendar.HOUR_OF_DAY, tp.getHour());
+                cal.set(Calendar.MINUTE, tp.getMinute());
+                cal.set(Calendar.SECOND, 0);
+                long chosen = cal.getTimeInMillis();
+                if (chosen <= System.currentTimeMillis()) {
+                    Toast.makeText(requireContext(),
+                                    "Time must be in the future", Toast.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
+                cb.onDateTimeChosen(chosen);
             });
-            dp.show(getParentFragmentManager(), "date");
+            tp.show(getParentFragmentManager(), "time");
         });
+        dp.show(getParentFragmentManager(), "date");
+    }
+
+    /**
+     * Generic check for duplicate reminders.
+     * Skip the reminder with skipId (use null to skip none).
+     * Extend this method for future criteria beyond timestamp.
+     */
+    private boolean isDuplicateReminder(@Nullable String skipId, long timestamp) {
+        for (Reminder existing : adapter.getCurrentList()) {
+            boolean sameTime = existing.getTriggerAt() == timestamp;
+            boolean skip = (skipId != null && existing.getId().equals(skipId));
+            if (sameTime && !skip) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void handleAdd(long timestamp) {
+        if (isDuplicateReminder(null, timestamp)) {
+            Toast.makeText(requireContext(),
+                            "A reminder at that exact time already exists", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        Reminder r = new Reminder(UUID.randomUUID().toString(), timestamp);
+        col.document(r.getId()).set(r)
+                .addOnSuccessListener(a -> {
+                    ReminderScheduler.schedule(requireContext(), r);
+                    Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
+                            .show();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
+                                .show()
+                );
+    }
+
+    private void handleEdit(Reminder original, long newTime) {
+        if (isDuplicateReminder(original.getId(), newTime)) {
+            Toast.makeText(requireContext(),
+                            "Another reminder is already set for that time", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+        ReminderScheduler.cancel(requireContext(), original);
+        original.setTriggerAt(newTime);
+        col.document(original.getId()).update("triggerAt", newTime)
+                .addOnSuccessListener(a -> {
+                    ReminderScheduler.schedule(requireContext(), original);
+                    Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
+                            .show();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
+                                .show()
+                );
+    }
+
+    private interface DateTimeCallback {
+        void onDateTimeChosen(long timestamp);
     }
 }
