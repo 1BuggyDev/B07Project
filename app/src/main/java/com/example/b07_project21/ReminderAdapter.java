@@ -1,6 +1,5 @@
 package com.example.b07_project21;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,6 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
         this.actionListener = l;
     }
 
-
-    private final List<Reminder> items = new ArrayList<>();
     public ReminderAdapter() {
         super(new DiffUtil.ItemCallback<Reminder>() {
             @Override public boolean areItemsTheSame(@NonNull Reminder a, @NonNull Reminder b) {
@@ -38,7 +35,8 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
             }
             @Override public boolean areContentsTheSame(@NonNull Reminder a, @NonNull Reminder b) {
                 return a.getTriggerAt() == b.getTriggerAt()
-                        && a.getFrequency() == b.getFrequency();
+                        && a.getFrequency().equals(b.getFrequency())
+                        && a.getMessage().equals(b.getMessage());
             }
         });
     }
@@ -65,16 +63,6 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
             }
             return true;
         });
-    }
-
-    /** Convenience for adding one new item on the fly. */
-    public void addItem(Reminder r) {
-        // take a copy of whatever’s currently in the list…
-        List<Reminder> copy = new ArrayList<>(getCurrentList());
-        // add the new one…
-        copy.add(r);
-        // and hand it back to the ListAdapter
-        submitList(copy);
     }
 
     static class VH extends RecyclerView.ViewHolder {

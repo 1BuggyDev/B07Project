@@ -2,6 +2,7 @@ package com.example.b07_project21;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,34 +31,21 @@ public class ReminderRepository {
       .document(fakeUid)
       .collection("reminders");
 
-    /**
-     * Fetches *all* reminders once, and returns a Task<Void>
-     */
-    public Task<Void> add(Reminder r) {
-        return col.document(r.getId()).set(r);
-    }
-
-    /** Fetch all reminders once. */
-    public void getAll(OnSuccessListener<List<Reminder>> onSuccess) {
-        col.get()
-                .addOnSuccessListener(snapshot -> {
+    public ListenerRegistration listenAll(OnSuccessListener<List<Reminder>> onChange,
+                                          OnFailureListener onError) {
+        return col
+                .orderBy("triggerAt")  // so they’re always sorted
+                .addSnapshotListener((snap, err) -> {
+                    if (err != null) {
+                        onError.onFailure(err);
+                        return;
+                    }
                     List<Reminder> list = new ArrayList<>();
-                    for (DocumentSnapshot ds : snapshot) {
+                    for (DocumentSnapshot ds : snap) {
                         Reminder r = ds.toObject(Reminder.class);
                         if (r != null) list.add(r);
                     }
-                    onSuccess.onSuccess(list);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("REM", "fetch failed", e);
+                    onChange.onSuccess(list);
                 });
     }
-
-    public ListenerRegistration listenAll(
-            EventListener<QuerySnapshot> listener) {
-        return col.orderBy("triggerAt", Query.Direction.ASCENDING)
-                .addSnapshotListener(listener);
-    }
-
-    // will add update() and delete() later
 }

@@ -4,6 +4,7 @@ public class Reminder {
     public enum Frequency { NONE }
     private String id;
     private long triggerAt;
+    private String message;
     private Frequency frequency = Frequency.NONE;
 
     public Reminder() {}  // Firestore needs no-arg ctor
@@ -18,5 +19,5 @@ public class Reminder {
     public long   getTriggerAt()    { return triggerAt; }
     public void   setTriggerAt(long t) { this.triggerAt = t; }
     public Frequency getFrequency()        { return frequency; }
-    public void      setFrequency(Frequency f) { this.frequency = f; }
+    public String getMessage() { return message != null ? message : ""; }
 }

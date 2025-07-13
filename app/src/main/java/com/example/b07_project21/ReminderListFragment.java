@@ -1,5 +1,6 @@
 package com.example.b07_project21;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,10 +106,29 @@ public class ReminderListFragment extends Fragment {
                         // cancel old alarm
                         ReminderScheduler.cancel(requireContext(), r);
                         // update model
-                        cal.setTimeInMillis(epoch);
+                        cal.setTimeInMillis(epoch + 86400000);
                         cal.set(Calendar.HOUR_OF_DAY, tp.getHour());
                         cal.set(Calendar.MINUTE, tp.getMinute());
                         cal.set(Calendar.SECOND, 0);
+
+                        long chosenTime = cal.getTimeInMillis();
+// 1) expired?
+                        if (chosenTime <= System.currentTimeMillis()) {
+                            Toast.makeText(requireContext(),
+                                            "Cannot set a reminder in the past", Toast.LENGTH_SHORT)
+                                    .show();
+                            return;
+                        }
+// 2) duplicate?
+                        for (Reminder existing : adapter.getCurrentList()) {
+                            if (existing.getTriggerAt() == chosenTime) {
+                                Toast.makeText(requireContext(),
+                                                "A reminder at that exact time already exists", Toast.LENGTH_SHORT)
+                                        .show();
+                                return;
+                            }
+                        }
+
                         r.setTriggerAt(cal.getTimeInMillis());
                         // persist & reschedule
                         col.document(r.getId())
@@ -140,6 +160,7 @@ public class ReminderListFragment extends Fragment {
         // 4) Real-time listener
         col.orderBy("triggerAt", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snaps,
                                         @Nullable FirebaseFirestoreException e) {
@@ -155,6 +176,8 @@ public class ReminderListFragment extends Fragment {
                             if (r != null) list.add(r);
                         }
                         adapter.submitList(list);
+                        // force RecyclerView to re-bind everything (including moved items)
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -168,10 +191,30 @@ public class ReminderListFragment extends Fragment {
                         .build();
                 tp.addOnPositiveButtonClickListener(t -> {
                     Calendar cal = Calendar.getInstance();
-                    cal.setTimeInMillis(epoch);
+                    cal.setTimeInMillis(epoch + 86400000);
                     cal.set(Calendar.HOUR_OF_DAY, tp.getHour());
                     cal.set(Calendar.MINUTE, tp.getMinute());
                     cal.set(Calendar.SECOND, 0);
+
+                    long chosenTime = cal.getTimeInMillis();
+// 1) expired?
+                    if (chosenTime <= System.currentTimeMillis()) {
+                        Toast.makeText(requireContext(),
+                                        "Cannot set a reminder in the past", Toast.LENGTH_SHORT)
+                                .show();
+                        return;
+                    }
+// 2) duplicate?
+                    for (Reminder existing : adapter.getCurrentList()) {
+                        if (existing.getTriggerAt() == chosenTime) {
+                            Toast.makeText(requireContext(),
+                                            "A reminder at that exact time already exists", Toast.LENGTH_SHORT)
+                                    .show();
+                            return;
+                        }
+                    }
+
+
                     Reminder r = new Reminder(
                             UUID.randomUUID().toString(),
                             cal.getTimeInMillis()
