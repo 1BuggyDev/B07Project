@@ -20,4 +20,6 @@
     <string name="empty"> </string>string>
     <string name="back">Back</string>string>
     <string name="next">Next</string>string>
+
+    <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
 </resources>
