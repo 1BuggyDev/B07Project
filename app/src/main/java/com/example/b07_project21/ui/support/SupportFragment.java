@@ -30,12 +30,11 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
 
     private SupportViewModel supportViewModel;
     private FragmentSupportBinding binding;
-    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         supportViewModel = new ViewModelProvider(this).get(SupportViewModel.class);
         binding = FragmentSupportBinding.inflate(inflater, container, false);
-        root = binding.getRoot();
+        View root = binding.getRoot();
         supportViewModel.initializeCityData(readJson());
 
         // city selection spinner
@@ -73,16 +72,18 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
     private void loadText(String city) {
         // loads the support info of the specified city using TextViews
         HashMap<String, HashMap<String, String>[]> cityMap = supportViewModel.getCityData();
+        HashMap<String, String>[] resources = cityMap.get(city);
         LinearLayout layout = binding.supportLinear;
-        if (cityMap.get(city) == null) {
+        if (resources == null) {
             System.err.println("Something went wrong. Invalid city. (loadText)");
             return;
         }
         layout.removeAllViews();
-        for (HashMap<String, String> cityInfo : cityMap.get(city)) {
+        for (HashMap<String, String> resource : resources) {
             TextView newView = new TextView(requireContext());
-            String title = cityInfo.get("title");
-            String info = cityInfo.get("info");
+            String title = resource.get("title");
+            String info = resource.get("info");
+            if (resource.get("info2") != null) info += "\n" + resource.get("info2");
             if (title == null || info == null) continue; // something went wrong
 
             // for hyperlinks/phone numbers
@@ -91,7 +92,7 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
 
             // text formatting
             SpannableString text = new SpannableString(title + "\n" + info + "\n");
-            text.setSpan(new AbsoluteSizeSpan(18, true), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new AbsoluteSizeSpan(20, true), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             text.setSpan(new AbsoluteSizeSpan(16, true), title.length(), text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             newView.setText(text);
             newView.setLineSpacing(0f, 1.4f); // not dp

@@ -7,7 +7,8 @@
         },
         {
             "title": "Find a Shelter",
-            "info": "ShelterSafe: https://sheltersafe.ca/ontario/\nToronto Services: https://www.torontocentralhealthline.ca/listServices.aspx?id=10714"
+            "info": "ShelterSafe: https://sheltersafe.ca/ontario/",
+            "info2": "Toronto Services: https://www.torontocentralhealthline.ca/listServices.aspx?id=10714"
         },
         {
             "title": "Get Legal Aid",
@@ -26,7 +27,8 @@
         },
         {
             "title": "Find a Shelter",
-            "info": "ShelterSafe: https://sheltersafe.ca/british-columbia/\nDomestic Shelters: https://www.domesticshelters.org/help/bc/vancouver"
+            "info": "ShelterSafe: https://sheltersafe.ca/british-columbia/",
+            "info2": "Domestic Shelters: https://www.domesticshelters.org/help/bc/vancouver"
         },
         {
             "title": "Get Legal Aid",
@@ -45,7 +47,8 @@
         },
         {
             "title": "Find a Shelter",
-            "info": "ShelterSafe: https://sheltersafe.ca/alberta/\nDomestic Shelters: https://www.domesticshelters.org/help/ab/edmonton"
+            "info": "ShelterSafe: https://sheltersafe.ca/alberta/",
+            "info2": "Domestic Shelters: https://www.domesticshelters.org/help/ab/edmonton"
         },
         {
             "title": "Get Legal Aid",
@@ -87,7 +90,8 @@
         },
         {
             "title": "Get Legal Aid",
-            "info": "Pro Bono Law: https://pblsask.ca"
+            "info": "Pro Bono Law: https://pblsask.ca",
+            "info2": "Legal Aid SK: https://legalaid.sk.ca"
         },
         {
             "title": "Police (Non-Emergency)",
