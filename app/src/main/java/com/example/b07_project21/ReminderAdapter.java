@@ -15,6 +15,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
+
+    /** Callback for edit/delete actions from the fragment */
+    public interface OnItemActionListener {
+        /** user long-pressed to edit this reminder */
+        void onEdit(Reminder r);
+        /** user swiped or chose to delete this reminder */
+        void onDelete(Reminder r);
+    }
+
+    private OnItemActionListener actionListener;
+    public void setOnItemActionListener(OnItemActionListener l) {
+        this.actionListener = l;
+    }
+
+
     private final List<Reminder> items = new ArrayList<>();
     public ReminderAdapter() {
         super(new DiffUtil.ItemCallback<Reminder>() {
@@ -35,12 +50,21 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
         return new VH(v);
     }
 
-    @Override public void onBindViewHolder(@NonNull VH h, int pos) {
+    @Override
+    public void onBindViewHolder(@NonNull VH h, int pos) {
         Reminder r = getItem(pos);
-        h.text.setText(
-                DateFormat.getDateTimeInstance()
-                        .format(new Date(r.getTriggerAt()))
-        );
+        // format the stored epoch millis into a human-readable string
+        String label = DateFormat
+                .getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
+                .format(r.getTriggerAt());
+        h.text.setText(label);
+        // long-press to edit:
+        h.itemView.setOnLongClickListener(v -> {
+            if (actionListener != null) {
+                actionListener.onEdit(r);
+            }
+            return true;
+        });
     }
 
     /** Convenience for adding one new item on the fly. */
@@ -59,5 +83,10 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
             super(v);
             text = v.findViewById(R.id.text_timestamp);
         }
+    }
+
+    /** convenience for fragment swipe/delete */
+    public Reminder getItemAt(int pos) {
+        return getItem(pos);
     }
 }

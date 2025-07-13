@@ -25,4 +25,6 @@
     <string name="notif_generic_title">Reminder</string>
     <string name="notif_generic_body">Time to review your plan.</string>
     <string name="add_reminder">Add reminder</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

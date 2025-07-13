@@ -18,4 +18,13 @@ public class ReminderScheduler {
         am.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, r.getTriggerAt(), pi);
     }
+
+    public static void cancel(Context ctx, Reminder r) {
+        AlarmManager am = ctx.getSystemService(AlarmManager.class);
+        Intent i = new Intent(ctx, ReminderReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(
+                ctx, r.getId().hashCode(), i, PendingIntent.FLAG_IMMUTABLE
+        );
+        am.cancel(pi);
+    }
 }
