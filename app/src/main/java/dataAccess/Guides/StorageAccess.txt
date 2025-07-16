@@ -1,0 +1,81 @@
+This file covers storage file access
+
+StorageAccess is a class with only static methods to use.
+Note that the user must be logged in before accessing files - see LoginManagement.txt
+
+As all files are linked to a UserData object, you need to provide a filePath
+This filePath is located in the UserData object
+    - The filePath is created upon calling the UserData.generateFilePath() function
+    - The filePath is automatically created upon calling the with-argument constructor that
+      does not have a filePath argument
+Use the getter UserData.getFilePath() to access it.
+
+
+File reading:
+Note files are read in order of upload (oldest file to newest file)
+First create a class implementing the FileListener interface
+    -Override public void onFilesReceived(ArrayList<byte[]> data);
+
+Note that data will be read as a byte[]
+
+class Example implements FileListener {
+    @Override
+    public void onFilesReceived(infoType type, ArrayList<byte[]> data) {
+        if(data == null) {
+            //no data
+        } else {
+            //do stuff
+        }
+    }
+}
+
+//Then call StorageAccess.readFiles(type, path, FileListener obj);
+StorageAccess.readFiles(type, path, new Example());
+
+
+
+File upload:
+Note that maximum file upload limit is 5 MB
+[Optional - create a class implementing the FileListener interface
+class Example implements FileListener {
+    @Override
+    public void onFileWritten(boolean wasSuccessful) {
+        //do stuff
+    }
+}
+]
+
+//Then call StorageAccess.uploadFile(type, path, [Optional FileListener obj]);
+StorageAccess.uploadFile(type, path, [optional new Example()]);
+
+
+
+File deletion - all files for one piece of data:
+[Optional - create a class implementing the FileListener interface
+class Example implements FileListener {
+    @Override
+    public void onFileDeleted(boolean wasSuccessful) {
+        // do stuff
+    }
+}
+]
+
+//Then call StorageAccess.deleteFiles(type, path, [Optional FileListener obj]);
+StorageAccess.deleteFiles(type, path, [Optional new Example()]);
+
+
+
+File deletion - one file
+Give an index to specify which file to delete.
+Order by file age (oldest to newest)
+[Optional - create a class implementing the FileListener interface
+class Example implements FileListener {
+    @Override
+    public void onFileDeleted(boolean wasSuccessful) {
+        // do stuff
+    }
+}
+]
+
+//Then call StorageAccess.deleteFile(type, path, idx, [Optional FileListener obj]);
+StorageAccess.deleteFile(type, path, idx, [optional new Example()]);
