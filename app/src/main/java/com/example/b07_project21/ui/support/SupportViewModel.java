@@ -11,12 +11,26 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
+import dataAccess.DatabaseAccess;
+import dataAccess.infoType;
+
 public class SupportViewModel extends ViewModel {
 
+    private String city;
     private HashMap<String, HashMap<String, String>[]> cityData;
 
     public SupportViewModel() {
+        city = "Vancouver"; // temp
+//        CityReader cityReader = new CityReader(this);
+//        DatabaseAccess.readData(infoType.ANSWER, cityReader);
+    }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public HashMap<String, HashMap<String, String>[]> getCityData() {

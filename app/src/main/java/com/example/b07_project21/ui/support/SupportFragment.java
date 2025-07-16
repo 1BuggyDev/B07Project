@@ -35,6 +35,7 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
         supportViewModel = new ViewModelProvider(this).get(SupportViewModel.class);
         binding = FragmentSupportBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        String city = supportViewModel.getCity();
         supportViewModel.initializeCityData(readJson());
 
         // city selection spinner
@@ -43,8 +44,6 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySelection.setAdapter(adapter);
         citySelection.setOnItemSelectedListener(this);
-
-        String city = "Edmonton"; // placeholder, firebase later
         if (adapter.getPosition(city) == -1) city = "Toronto";
         citySelection.setSelection(adapter.getPosition(city));
         loadText(city);

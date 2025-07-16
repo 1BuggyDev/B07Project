@@ -2,8 +2,8 @@
     "Toronto":
     [
         {
-            "title": "Toronto Victim Services 24/7 Crisis Line",
-            "info": "416-808-7066"
+            "title": "24/7 Crisis Line",
+            "info": "Toronto Victim Services: 416-808-7066"
         },
         {
             "title": "Find a Shelter",
@@ -22,8 +22,8 @@
     "Vancouver":
     [
         {
-            "title": "VictimLinkBC 24/7 Helpline",
-            "info": "Call or text: 1-800-563-0808"
+            "title": "24/7 Helpline",
+            "info": "VictimLinkBC: 1-800-563-0808"
         },
         {
             "title": "Find a Shelter",
