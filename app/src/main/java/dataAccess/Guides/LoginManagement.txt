@@ -1,0 +1,54 @@
+This file covers login and account creation
+
+To create an account:
+Have a class implementing the AccountListener interface:
+    -Override public void onAccountCreation(boolean success);
+
+class Example implements AccountListener {
+    public Example() {};
+
+    @Override
+    public void onAccountCreation(boolean success) {
+        //do stuff
+    }
+}
+
+LoginManager.createAccount(email, password, new Example());
+
+
+
+To create a pin:
+PinManager.setPin(pin, context);
+
+
+
+Note that creating pins or accounts do NOT perform a login.
+
+
+To login to an account with email and password:
+Have a class implementing the AccountListener interface:
+    -Override public void onEmailLogin(FirebaseUser user);
+
+class Example implements AccountListener {
+    public Example() {};
+
+    @Override
+    public void onEmailLogin(FirebaseUser user) {
+        //do stuff
+    }
+}
+
+LoginManager.attemptLogin(email, password, new Example());
+
+
+To login to an account with pin (Need pin initialized first):
+LoginManager.attemptLogin(pin, context);
+
+Note that this will return a FirebaseUser which can be used to determine if it was successful
+FirebaseUser res = LoginManager.attemptLogin(pin, context);
+
+if(res == null) {
+    //failure
+} else {
+    //success
+}
