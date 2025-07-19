@@ -5,8 +5,8 @@ import java.util.ArrayList;
 /**
  * An interface for calling methods after file operations <br>
  * Methods: <br>
- * public void onFilesReceived(infoType type, ArrayList<byte[]> data);
- * public void onFileWritten(boolean wasSuccessful);
+ * public void onFilesReceived(infoType type, ArrayList<byte[]> data); <br>
+ * public void onFileWritten(boolean wasSuccessful); <br>
  * public void onFileDeleted(boolean wasSuccessful);
  */
 public interface FileListener {

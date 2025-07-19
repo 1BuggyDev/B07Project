@@ -194,6 +194,9 @@ public class DatabaseAccess {
         if(isDataInitialized()) {
             dataTree.addData(type, data);
             writeRef.setValue(dataTree.getData(type));
+            if(obj != null) {
+                obj.onDataWritten(type, dataTree.getData(type));
+            }
             return;
         }
 

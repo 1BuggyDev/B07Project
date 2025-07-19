@@ -27,7 +27,7 @@ public class LoginManager {
     /**
      * Given a pin, tests if it is the correct pin for the account
      * @param pin the pin to test
-     * @return true if the pin is correct, false otherwise
+     * @return a FirebaseUser which is null if the login failed
      * @throws MissingResourceException if there is a missing pin or salt
      * @throws Exception if an error occurred while attempting to hash the pin
      */
@@ -62,10 +62,13 @@ public class LoginManager {
                 if(task.isSuccessful()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     DatabaseAccess.user = user;
+                    DatabaseAccess.db = FirebaseDatabase.getInstance("https://cscb07project-8e5e3-default-rtdb.firebaseio.com/");
                     DatabaseAccess.ref = DatabaseAccess.db.getReference(getPath(user));
                     StorageAccess.user = user;
                     StorageAccess.storage = FirebaseStorage.getInstance();
-                    obj.onEmailLogin(user);
+                    if(obj != null) {
+                        obj.onEmailLogin(user);
+                    }
                     Log.d("Login", "Success");
                 } else {
                     obj.onEmailLogin(null);
