@@ -84,7 +84,8 @@ public class WarmFragment extends Fragment {
             } else {
                 Bundle b = makeBundle();
                 if (situation == 1) {
-                    Toast.makeText(getContext(), "Next to Branch 1", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "Next to Branch 1", Toast.LENGTH_SHORT).show();
+
                     navController.navigate(R.id.nav_question_branch_1, b);
                 } else if (situation == 2) {
                     Toast.makeText(getContext(), "Next to Branch 2", Toast.LENGTH_SHORT).show();
