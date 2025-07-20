@@ -88,7 +88,8 @@ public class WarmFragment extends Fragment {
 
                     navController.navigate(R.id.nav_question_branch_1, b);
                 } else if (situation == 2) {
-                    Toast.makeText(getContext(), "Next to Branch 2", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "Next to Branch 2", Toast.LENGTH_SHORT).show();
+
                     navController.navigate(R.id.nav_question_branch_2, b);
                 } else if (situation == 3) {
                     Toast.makeText(getContext(), "Next to Branch 3", Toast.LENGTH_SHORT).show();
