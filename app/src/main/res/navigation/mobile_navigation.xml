@@ -22,9 +22,9 @@
         tools:layout="@layout/fragment_safety" />
     <fragment
         android:id="@+id/nav_questionnaire"
-        android:name="com.example.b07_project21.ui.questionnaire.QuestionnaireFragment"
+        android:name="com.example.b07_project21.ui.questionnaire.IntroFragment"
         android:label="@string/questionnaire"
-        tools:layout="@layout/fragment_questionnaire" />
+        tools:layout="@layout/fragment_questionnaire_intro" />
     <fragment
         android:id="@+id/nav_emergency"
         android:name="com.example.b07_project21.ui.emergency_info.EmergencyFragment"
@@ -40,4 +40,41 @@
         android:name="com.example.b07_project21.ui.exit.ExitFragment"
         android:label="@string/exit"
         tools:layout="@layout/fragment_exit" />
+
+    <!-- Questionnaire -->
+    <!--<fragment
+        android:id="@+id/nav_questionnaire"
+        android:name="com.example.b07_project21.ui.questionnaire.IntroFragment"
+        android:label="questionnaire intro"
+        tools:layout="@layout/fragment_questionnaire_intro" />-->
+    <fragment
+        android:id="@+id/nav_question_warm"
+        android:name="com.example.b07_project21.ui.questionnaire.WarmFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_warm" />
+    <fragment
+        android:id="@+id/nav_question_branch_1"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch1Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_1" />
+    <fragment
+        android:id="@+id/nav_question_branch_2"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch2Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_2" />
+    <fragment
+        android:id="@+id/nav_question_branch_3"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch3Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_3" />
+    <fragment
+        android:id="@+id/nav_question_follow"
+        android:name="com.example.b07_project21.ui.questionnaire.FollowFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_follow" />
+    <fragment
+        android:id="@+id/nav_question_close"
+        android:name="com.example.b07_project21.ui.questionnaire.CloseFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_close" />
 </navigation>
