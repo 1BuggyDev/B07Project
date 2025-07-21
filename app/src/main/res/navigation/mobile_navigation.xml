@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -40,7 +41,11 @@
         android:name="com.example.b07_project21.ui.exit.ExitFragment"
         android:label="@string/exit"
         tools:layout="@layout/fragment_exit" />
-
+    <fragment
+        android:id="@+id/nav_reminders"
+        android:name="com.example.b07_project21.ReminderListFragment"
+        android:label="@string/menu_reminders"
+        tools:layout="@layout/fragment_reminder_list" />
     <!-- Questionnaire -->
     <!--<fragment
         android:id="@+id/nav_questionnaire"
