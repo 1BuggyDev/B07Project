@@ -92,13 +92,6 @@ public class CloseFragment extends Fragment {
         Bundle b = new Bundle();
         b.putInt("action", 0);
 
-        b.putInt("situation", situation);
-        b.putString("selected_city", city);
-        b.putString("safe_room", safe_room);
-        b.putInt("live_with", live_status);
-        b.putString("children", children);
-        b.putString("code_word", code_word);
-
         // warm-up
         b.putInt("situation", situation);
         b.putString("selected_city", city);
