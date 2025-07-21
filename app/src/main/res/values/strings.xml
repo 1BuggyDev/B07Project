@@ -39,7 +39,7 @@
     <string name="safety_planning">Safety Planning</string>
     <string name="safety_plan_image">Safety Plan Image</string>
     <string name="safety_planning_description">A safety plan is a personalized and practical guide
-        to help keep you safe. It’s designed to support you whether you’re currently experiencing
+        to help keep you safe. It\'s designed to support you whether you\'re currently experiencing
         abuse, preparing to leave, or adjusting after leaving an abusive situation. </string>
     <string name="safety_planning_advice">Complete the following questionnaire to create your
         personal safety plan. </string>
@@ -85,7 +85,7 @@
     <string name="enter_safety_tools_equipment">What safety tools are you using?</string>
     <string name="equipment">Equipment</string>
     <string name="which_type_of_support_would_help_most_right_now">Which type of support would help most right now?</string>
-    <string name="councelling">Councelling</string>
+    <string name="counselling">Counselling</string>
     <string name="legal_aid">Legal aid</string>
     <string name="financial_guidance">Financial guidance</string>
     <string name="co_parenting_resources">Co-parenting resources</string>
