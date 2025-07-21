@@ -8,18 +8,107 @@
     <string name="action_settings">Settings</string>
 
     <!-- Pages Titles -->
-    <string name="home">Home</string>string>
-    <string name="safety_plan">Safety Plan</string>string>
-    <string name="questionnaire">Questionnaire</string>string>
-    <string name="emergency_info">Emergency Information</string>string>
-    <string name="support_connect">Support Connection</string>string>
-    <string name="notifications">Notifications</string>string>
+    <string name="home">Home</string>
+    <string name="safety_plan">Safety Plan</string>
+    <string name="questionnaire">Questionnaire</string>
+    <string name="emergency_info">Emergency Information</string>
+    <string name="support_connect">Support Connection</string>
+    <string name="notifications">Notifications</string>
 
-    <!-- Bottom Buttons -->
-    <string name="exit">Exit App</string>string>
-    <string name="empty"> </string>string>
-    <string name="back">Back</string>string>
-    <string name="next">Next</string>string>
-
+    <!-- Support Page -->
     <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
+  
+    <!-- Bottom Buttons -->
+    <string name="exit">Exit App</string>
+    <string name="empty"> </string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+
+    <!-- City Array -->
+    <string-array name="cities">
+        <item>Toronto</item>
+        <item>Calgary</item>
+        <item>Edmonton</item>
+        <item>Saskatoon</item>
+        <item>Vancouver</item>
+    </string-array>
+
+    <!-- Questionnaire Strings / Warm-up -->
+    <string name="warm_up_questions">Getting to Know You</string>
+    <string name="which_best_describes_your_situation">Which best describes your situation?</string>
+    <string name="still_in_a_relationship">Still in a relationship</string>
+    <string name="planning_to_leave">Planning to leave</string>
+    <string name="post_separation">Post-separation</string>
+    <string name="safety_planning">Safety Planning</string>
+    <string name="safety_plan_image">Safety Plan Image</string>
+    <string name="safety_planning_description">A safety plan is a personalized and practical guide
+        to help keep you safe. It\'s designed to support you whether you\'re currently experiencing
+        abuse, preparing to leave, or adjusting after leaving an abusive situation. </string>
+    <string name="safety_planning_advice">Complete the following questionnaire to create your
+        personal safety plan. </string>
+    <string name="safety_planning_help">Click the \"Next\" button to begin the questionnaire, or
+        click on the \"Back\" button to exit the questionnaire to the homepage (note that new users
+        must complete the questionnaire upon logging in for the first time). </string>
+    <string name="what_city_do_you_live_in">What city do you live in?</string>
+    <string name="which_room_in_your_home_feels_the_safest_if_you_need_to_get_away_quickly">Which room in your home feels the safest if you need to get away quickly?</string>
+    <string name="room">Room</string>
+    <string name="who_do_you_live_with">Who do you live with?</string>
+    <string name="family">Family</string>
+    <string name="roommates">Roommates</string>
+    <string name="alone">Alone</string>
+    <string name="partner">Partner</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="safe_word">Safe Word</string>
+    <string name="enter_a_code_word">What is your family\'s safety code word?</string>
+    <string name="do_you_have_children">Do you have children?</string>
+
+    <!-- Questionnaire Strings / Branch-Specific -->
+    <string name="branch_questions">Your Situation</string>
+    <string name="follow_questions">Support Needs</string>
+    <string name="which_form_s_of_abuse_are_you_experiencing">Which form(s) of abuse are you experiencing?</string>
+    <string name="physical">Physical</string>
+    <string name="emotional">Emotional</string>
+    <string name="financial">Financial</string>
+    <string name="other">Other</string>
+    <string name="are_you_recording_the_incidents_dates_times_details">Are you recording the incidents (dates, times, details)?</string>
+    <string name="contact_name">Contact Name</string>
+    <string name="date_hint">e.g. yyyy-mm-dd</string>
+    <string name="do_you_have_a_go_bag_packed_with_essentials">Do you have a go-bag packed with essentials?</string>
+    <string name="where_do_you_keep_emergency_cash_or_cards">Where do you keep emergency cash or cards?</string>
+    <string name="location">Location</string>
+    <string name="have_you_identified_a_safe_place_to_stay">Have you identified a safe place to stay?</string>
+    <string name="enter_the_temporary_shelter_location">Where do you plan to stay?</string>
+    <string name="when_do_you_plan_to_leave">When do you plan to leave?</string>
+    <string name="has_the_abuser_continued_any_contact">Has the abuser continued any contact?</string>
+    <string name="do_you_have_a_protection_order_if_yes_which_type">Do you have a protection order? If yes, which type?</string>
+    <string name="enter_legal_order">What legal order do you have?</string>
+    <string name="legal_order">Legal Order</string>
+    <string name="are_you_using_any_safety_tools_cameras_door_alarms">Are you using any safety tools (cameras, door alarms)?</string>
+    <string name="enter_safety_tools_equipment">What safety tools are you using?</string>
+    <string name="equipment">Equipment</string>
+    <string name="which_type_of_support_would_help_most_right_now">Which type of support would help most right now?</string>
+    <string name="counselling">Counselling</string>
+    <string name="legal_aid">Legal aid</string>
+    <string name="financial_guidance">Financial guidance</string>
+    <string name="co_parenting_resources">Co-parenting resources</string>
+    <string name="safety_plan_completed">Safety Plan Completed</string>
+
+    <!-- Close -->
+    <string name="safety_planning_done">You have successfully completed your personal safety plan
+        designed to support you. </string>
+    <string name="safety_planning_disclaimer">Disclaimer: This safety plan is a personal tool meant
+        to support your well-being. While it can help you prepare and reduce risk, it does not
+        guarantee your safety or prevent all harm.</string>
+    <string name="safety_planning_advice_help">Next steps! Click the \"Next\" button to save and
+        update your personal information. To view your updated safety plan, please use the
+        \"Safety Plan\" tab to see it. </string>
+    <string name="name_one_person_you_can_call_immediately_in_an_emergency">Name one person you can call immediately in an emergency.</string>
+
+    <string name="menu_reminders">Reminders</string>
+    <string name="notif_generic_title">Reminder</string>
+    <string name="notif_generic_body">Time to review your plan.</string>
+    <string name="add_reminder">Add reminder</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
