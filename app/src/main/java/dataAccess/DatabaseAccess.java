@@ -26,7 +26,7 @@ import java.util.Map;
  * Note that this is not the same as Firebase Storage which is for user-uploaded files <br>
  * See Guides/DatabaseAccess.txt for a guide on using this class
  */
-public class DatabaseAccess {
+public final class DatabaseAccess {
     protected static FirebaseUser user;
     protected static FirebaseDatabase db;
     protected static DatabaseReference ref;
@@ -34,6 +34,10 @@ public class DatabaseAccess {
     private static DataTree dataTree;
 
     private DatabaseAccess() {}
+
+    public static String getUserID() {
+        return user.getUid();
+    }
 
     /**
      * Checks if a user is signed in

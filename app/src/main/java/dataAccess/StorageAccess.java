@@ -28,11 +28,15 @@ import java.util.List;
  * Note that this is not the same as Firebase Database which is for non-file data <br>
  * See Guides/StorageAccess.txt for a guide on using this class
  */
-public class StorageAccess {
+public final class StorageAccess {
     protected static FirebaseStorage storage;
     protected static FirebaseUser user;
 
     private StorageAccess() {}
+
+    public static String getUserID() {
+        return user.getUid();
+    }
 
     /**
      * Checks if a user is signed in
