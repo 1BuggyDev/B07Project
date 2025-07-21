@@ -1,0 +1,110 @@
+This file covers database access
+
+DatabaseAccess is a class with only static methods to use.
+Note that the user must be logged in before accessing data - see LoginManagement.txt
+
+Structure:
+There are 5 types of data that can be uploaded, stored in the enumeration infoType:
+    -ANSWER: an answer to the questionnaire
+        - Stored in a HashMap<String, String>
+    -DOCUMENT: a document the user uploaded
+        - Stored in an ArrayList<Document>
+    -CONTACT: an emergency contact
+        - Stored in an ArrayList<EmergencyContact>
+    -LOCATION: a safe location
+        - Stored in an ArrayList<SafeLocation>
+    -MEDICATION: a medication with dosage info
+        - Stored in an ArrayList<Medication>
+
+
+Reading:
+To read any of the objects, first create a class implementing the DataListener interface
+    - Override public void onDataReceived(infoType type, Object data);
+
+class Example implements DataListener {
+    @Override
+    public void onDataReceived(infoType type, Object data) {
+        if(data == null) {
+            //No data to read
+        } else {
+            //need to typecast data to the correct type as seen under Structure
+            //do stuff
+        }
+    }
+}
+
+//Then call DatabaseAccess.readData(infoType type, DataListener obj);
+
+DatabaseAccess.readData(type, new Example());
+
+
+
+
+Writing:
+To write a new object
+
+[optional - create a class implementing the DataListener interface
+class Example implements DataListener {
+    @Override
+    public void onDataWritten(infoType type, Object data) {
+        if(data == null) {
+            //write failed
+        } else {
+            //data needs to be typecasted to the correct type as seen under Stucture
+            //data contains all the data the user has of the type
+        }
+    }
+}
+]
+
+//Then call DatabaseAccess.writeData(infoType type, Object data, [optional DataListener obj]);
+//Data must be a single piece of data of the correct type - see UserDataClasses.txt
+DatabaseAccess.writeData(type, data, [optional new Example()]);
+
+
+
+Editing:
+To edit data you must have a key to the specific piece of data.
+For ANSWER data, the key is the same key in the HashMap<String, String>
+For other data, the key is the index of the object in the ArrayList (String.valueOf(key))
+
+[optional - create a class implementing the DataListener interface
+class Example implements DataListener {
+    @Override
+    public void onDataModified(infoType type, Object data) {
+        if(data == null) {
+            //write failed
+        } else {
+            //data needs to be typecasted to the correct type as seen under Stucture
+            //data contains all the data the user has of the type
+        }
+    }
+}
+]
+
+//Then call DatabaseAccess.editData(infoType type, String key, Object newData, [optional DataListener obj]);
+DatabaseAccess.editData(type, key, data, [optional new Example()]);
+
+
+
+Deleting:
+To delete data you must have a key to the specific piece of data.
+For ANSWER data, the key is the same key in the HashMap<String, String>
+For other data, the key is the index of the object in the ArrayList (String.valueOf(key))
+
+[optional - create a class implementing the DataListener interface
+class Example implements DataListener {
+    @Override
+    public void onDataDeleted(infoType type, Object data) {
+        if(data == null) {
+            //write failed
+        } else {
+            //data needs to be typecasted to the correct type as seen under Stucture
+            //data contains all the data the user has of the type
+        }
+    }
+}
+]
+
+//Then call DatabaseAccess.deleteData(infoType type, String key, [option DataListener obj]);
+DatabaseAccess.deleteData(type, key, new Example());
