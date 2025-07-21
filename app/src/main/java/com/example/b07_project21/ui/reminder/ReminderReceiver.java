@@ -1,4 +1,4 @@
-package com.example.b07_project21;
+package com.example.b07_project21.ui.reminder;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -6,11 +6,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.example.b07_project21.MainActivity;
+import com.example.b07_project21.R;
 
 public class ReminderReceiver extends BroadcastReceiver {
     private static final String CH_ID = "reminders";

@@ -1,4 +1,4 @@
-package com.example.b07_project21;
+package com.example.b07_project21.ui.reminder;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;

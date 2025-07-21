@@ -1,4 +1,4 @@
-package com.example.b07_project21;
+package com.example.b07_project21.ui.reminder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_project21.R;
+
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
 
     /** Callback for edit/delete actions from the fragment */

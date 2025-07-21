@@ -1,4 +1,4 @@
-package com.example.b07_project21;
+package com.example.b07_project21.ui.reminder;
 
 public class Reminder {
     public enum Frequency { NONE }
