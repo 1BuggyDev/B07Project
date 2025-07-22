@@ -36,10 +36,10 @@
             android:icon="@drawable/bot_menu_exit"
             android:title="@string/exit" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_reminders"
             android:icon="@drawable/ic_reminder"
             android:title="@string/menu_reminders"
-            app:destination="@id/nav_reminders" />
+            app:destination="@id/nav_reminders" />-->
     </group>
 </menu>
