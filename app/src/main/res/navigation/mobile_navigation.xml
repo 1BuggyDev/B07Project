@@ -33,19 +33,19 @@
         tools:layout="@layout/fragment_emergency" />
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.example.b07_project21.ui.notification.NotificationFragment"
-        android:label="@string/notifications"
-        tools:layout="@layout/fragment_notification" />
+        android:name="com.example.b07_project21.ui.reminder.ReminderListFragment"
+        android:label="@string/menu_reminders"
+        tools:layout="@layout/fragment_reminder_list" />
     <fragment
         android:id="@+id/nav_exit"
         android:name="com.example.b07_project21.ui.exit.ExitFragment"
         android:label="@string/exit"
         tools:layout="@layout/fragment_exit" />
-    <fragment
+    <!--<fragment
         android:id="@+id/nav_reminders"
         android:name="com.example.b07_project21.ReminderListFragment"
         android:label="@string/menu_reminders"
-        tools:layout="@layout/fragment_reminder_list" />
+        tools:layout="@layout/fragment_reminder_list" />-->
     <!-- Questionnaire -->
     <!--<fragment
         android:id="@+id/nav_questionnaire"
