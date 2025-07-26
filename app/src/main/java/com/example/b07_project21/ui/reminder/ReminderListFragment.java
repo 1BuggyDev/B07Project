@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_project21.R;
+import com.google.android.gms.common.util.BiConsumer;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.firestore.CollectionReference;
@@ -178,17 +181,19 @@ public class ReminderListFragment extends Fragment {
             return;
         }
 
-        Reminder r = new Reminder(UUID.randomUUID().toString(), timestamp);
-        col.document(r.getId()).set(r)
-                .addOnSuccessListener(a -> {
-                    ReminderScheduler.schedule(requireContext(), r);
-                    Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
-                            .show();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
-                                .show()
-                );
+        promptText(timestamp, (ts, msg) -> {
+            Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg);
+            col.document(r.getId()).set(r)
+                    .addOnSuccessListener(a -> {
+                        ReminderScheduler.schedule(requireContext(), r);
+                        Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
+                                .show();
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
+                                    .show()
+                    );
+        });
     }
 
     private void handleEdit(Reminder original, long newTime) {
@@ -199,20 +204,37 @@ public class ReminderListFragment extends Fragment {
             return;
         }
         ReminderScheduler.cancel(requireContext(), original);
-        original.setTriggerAt(newTime);
-        col.document(original.getId()).update("triggerAt", newTime)
-                .addOnSuccessListener(a -> {
-                    ReminderScheduler.schedule(requireContext(), original);
-                    Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
-                            .show();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
-                                .show()
-                );
+        promptText(newTime, (ts, msg) -> {
+            original.setTriggerAt(ts);
+            original.setMessage(msg);
+            col.document(original.getId())
+                    .update("triggerAt", ts, "message", msg)
+                    .addOnSuccessListener(a -> {
+                        ReminderScheduler.schedule(requireContext(), original);
+                        Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
+                                .show();
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
+                                    .show()
+                    );
+        });
     }
 
     private interface DateTimeCallback {
         void onDateTimeChosen(long timestamp);
+    }
+
+    /** Prompts for a custom message, then runs cb(timestamp, message) */
+    private void promptText(long ts, BiConsumer<Long,String> cb) {
+        EditText input = new EditText(requireContext());
+        input.setHint("Notification text (optional)");
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Add message")
+                .setView(input)
+                .setPositiveButton("Save", (d, w) -> cb.accept(ts,
+                        input.getText() != null ? input.getText().toString().trim() : ""))
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 }

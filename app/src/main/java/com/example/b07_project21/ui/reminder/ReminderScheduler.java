@@ -10,7 +10,8 @@ public class ReminderScheduler {
     @SuppressLint("ScheduleExactAlarm")
     public static void schedule(Context ctx, Reminder r) {
         Intent i = new Intent(ctx, ReminderReceiver.class)
-                .putExtra("id", r.getId());
+                .putExtra("id",  r.getId())
+                .putExtra("msg", r.getMessage());
         PendingIntent pi = PendingIntent.getBroadcast(
                 ctx, r.getId().hashCode(), i, PendingIntent.FLAG_IMMUTABLE);
 

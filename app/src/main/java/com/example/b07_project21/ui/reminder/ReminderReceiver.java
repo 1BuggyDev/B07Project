@@ -28,10 +28,15 @@ public class ReminderReceiver extends BroadcastReceiver {
         PendingIntent tap = PendingIntent.getActivity(
                 ctx, 0, tapIntent, PendingIntent.FLAG_IMMUTABLE);
 
+        String body = in.getStringExtra("msg");
+        if (body == null || body.isEmpty()) {
+            body = ctx.getString(R.string.notif_generic_body); // fallback
+        }
         NotificationCompat.Builder nb = new NotificationCompat.Builder(ctx, CH_ID)
                 .setSmallIcon(R.drawable.ic_reminder)
                 .setContentTitle(ctx.getString(R.string.notif_generic_title))
-                .setContentText(ctx.getString(R.string.notif_generic_body))
+                .setContentText(body)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body)) // for longer notes
                 .setContentIntent(tap)
                 .setAutoCancel(true);
 
