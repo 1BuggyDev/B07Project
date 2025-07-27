@@ -1,6 +1,6 @@
 package com.example.b07_project21.ui.reminder;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,21 +182,21 @@ public class ReminderListFragment extends Fragment {
             return;
         }
 
-        promptText(timestamp, (ts, msg) -> {
-            // TODO: replace Frequency.NONE with the user’s pick from your UI
-            Reminder.Frequency pick = Reminder.Frequency.ONCE;
-            Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg, pick);
-            col.document(r.getId()).set(r)
-                    .addOnSuccessListener(a -> {
-                        ReminderScheduler.schedule(requireContext(), r);
-                        Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
-                                .show();
-                    })
-                    .addOnFailureListener(e ->
+        promptFrequency(timestamp, (firstTs, pick) ->
+                promptText(firstTs, (ts, msg) -> {
+                    Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg, pick);
+                    col.document(r.getId()).set(r)
+                        .addOnSuccessListener(a -> {
+                            ReminderScheduler.schedule(requireContext(), r);
+                            Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
+                                    .show();
+                            }).
+                        addOnFailureListener(e ->
                             Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
                                     .show()
                     );
-        });
+                })
+        );
     }
 
     private void handleEdit(Reminder original, long newTime) {
@@ -207,26 +207,29 @@ public class ReminderListFragment extends Fragment {
             return;
         }
         ReminderScheduler.cancel(requireContext(), original);
-        promptText(newTime, (ts, msg) -> {
-            original.setTriggerAt(ts);
-            original.setMessage(msg);
-            // TODO: also call original.setFrequency(pick) after your UI
-            col.document(original.getId())
-                    .update(
-                            "triggerAt", ts,
-                            "message", msg,
-                            "frequency", original.getFrequency().name()
-                    )
-                    .addOnSuccessListener(a -> {
-                        ReminderScheduler.schedule(requireContext(), original);
-                        Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
-                                .show();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
-                                    .show()
-                    );
-        });
+        ReminderScheduler.cancel(requireContext(), original);
+        promptFrequency(newTime, (firstTs, pick) ->
+                promptText(firstTs, (ts, msg) -> {
+                    original.setTriggerAt(ts);
+                    original.setMessage(msg);
+                    original.setFrequency(pick);
+                    col.document(original.getId())
+                            .update(
+                                    "triggerAt", ts,
+                                    "message", msg,
+                                    "frequency", original.getFrequency().name()
+                            )
+                            .addOnSuccessListener(a -> {
+                                ReminderScheduler.schedule(requireContext(), original);
+                                Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
+                                        .show();
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
+                                            .show()
+                            );
+                })
+        );
     }
 
     private interface DateTimeCallback {

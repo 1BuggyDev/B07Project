@@ -43,5 +43,20 @@ public class ReminderReceiver extends BroadcastReceiver {
         // there is some issue here, yet it still runs
         NotificationManagerCompat.from(ctx)
                 .notify(in.getStringExtra("id").hashCode(), nb.build());
+
+        String fStr = in.getStringExtra("frequency");
+        if ("MONTHLY".equals(fStr)) {
+            long next = System.currentTimeMillis();
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTimeInMillis(next);
+            cal.add(java.util.Calendar.MONTH, 1);
+
+            Reminder tmp = new Reminder(
+                    in.getStringExtra("id"),
+                    cal.getTimeInMillis(),
+                    in.getStringExtra("msg"),
+                    Reminder.Frequency.MONTHLY);
+            ReminderScheduler.schedule(ctx, tmp);
+        }
     }
 }

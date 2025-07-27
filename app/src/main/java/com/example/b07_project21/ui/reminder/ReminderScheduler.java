@@ -17,8 +17,6 @@ public class ReminderScheduler {
                 ctx, r.getId().hashCode(), i, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-        am.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP, r.getTriggerAt(), pi);
 
         switch (r.getFrequency()) {
             case ONCE:
