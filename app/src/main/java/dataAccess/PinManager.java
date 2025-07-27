@@ -55,6 +55,18 @@ public class PinManager {
     }
 
     /**
+     * Determines if a pin has been created so far
+     * @param context the current context
+     * @return true if a pin exists, false otherwise
+     */
+    public static boolean pinExists(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getPackageName() + "_encrypted_pin", Context.MODE_PRIVATE);
+        String encryptedPin = sharedPreferences.getString("pin", null);
+
+        return encryptedPin != null;
+    }
+
+    /**
      * Sets the pin
      * @param pin the pin to store
      * @param context the current context
@@ -106,5 +118,13 @@ public class PinManager {
         }
 
         return Base64.getEncoder().encodeToString(hash);
+    }
+
+    public static void testFunctionRemovePin(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getPackageName() + "_encrypted_pin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("pin");
+        editor.remove("salt");
+        editor.commit();
     }
 }
