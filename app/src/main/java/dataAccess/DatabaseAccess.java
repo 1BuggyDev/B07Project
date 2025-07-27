@@ -154,10 +154,14 @@ public final class DatabaseAccess {
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                dataTree = new DataTree(task.getResult());
+                if(task.isSuccessful()) {
+                    dataTree = new DataTree(task.getResult());
 
-                if(obj != null) {
-                    obj.onDataReceived(type,  dataTree.getData(type));
+                    if (obj != null) {
+                        obj.onDataReceived(type, dataTree.getData(type));
+                    }
+                } else {
+                    obj.onDataReceived(type, null);
                 }
             }
         });
@@ -190,7 +194,7 @@ public final class DatabaseAccess {
         }
         String err = isDataValid(type, data);
         if(err != null) {
-            Log.e("Database", err);
+            //Log.e("Database", err);
             throw new IllegalArgumentException(err);
         }
         DatabaseReference writeRef = db.getReference(getPath(type, user));
@@ -226,12 +230,12 @@ public final class DatabaseAccess {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             obj.onDataWritten(type, null);
-                            Log.e("DatabaseAccess.writeData", "Unable to write data", e);
+                            //Log.e("DatabaseAccess.writeData", "Unable to write data", e);
                         }
                     });
                 } else {
                     obj.onDataWritten(type, null);
-                    Log.e("DatabaseAccess.writeData", "Error retrieving data", task.getException());
+                    //Log.e("DatabaseAccess.writeData", "Error retrieving data", task.getException());
                 }
             }
         });
@@ -274,11 +278,11 @@ public final class DatabaseAccess {
 
         String err = isDataValid(type, newData, true);
         if(err != null) {
-            Log.e("Database", err);
+            //Log.e("Database", err);
             throw new IllegalArgumentException(err);
         }
-        Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put(key, newData);
+        //Map<String, Object> updates = new HashMap<String, Object>();
+        //updates.put(key, newData);
 
         if(isDataInitialized()) {
             DatabaseReference writeRef = db.getReference(getPath(type, user));
@@ -296,11 +300,13 @@ public final class DatabaseAccess {
 
 
             if(obj == null) {
-                writeRef.updateChildren(updates);
+                writeRef.setValue(dataTree.getData(type));
+                //writeRef.updateChildren(updates);
                 return;
             }
 
-            writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            //writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            writeRef.setValue(dataTree.getData(type)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()) {
@@ -316,7 +322,7 @@ public final class DatabaseAccess {
                         } else {
                             obj.onDataModified(type, null);
                         }
-                        Log.e("Database", "Error updating data");
+                        //Log.e("Database", "Error updating data");
                     }
                 }
             });
@@ -340,10 +346,12 @@ public final class DatabaseAccess {
                 }
                 dataTree.updateData(type, key, newData);
                 if(obj == null) {
-                    writeRef.updateChildren(updates);
+                    //writeRef.updateChildren(updates);
+                    writeRef.setValue(dataTree.getData(type));
                     return;
                 }
-                writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                //writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                writeRef.setValue(dataTree.getData(type)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
@@ -359,7 +367,7 @@ public final class DatabaseAccess {
                             } else {
                                 obj.onDataModified(type, null);
                             }
-                            Log.e("Database", "Error updating data");
+                            //Log.e("Database", "Error updating data");
                         }
                     }
                 });
