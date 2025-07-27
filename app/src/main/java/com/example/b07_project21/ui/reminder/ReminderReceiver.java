@@ -12,6 +12,9 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.b07_project21.MainActivity;
 import com.example.b07_project21.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 
 public class ReminderReceiver extends BroadcastReceiver {
     private static final String CH_ID = "reminders";
@@ -44,19 +47,29 @@ public class ReminderReceiver extends BroadcastReceiver {
         NotificationManagerCompat.from(ctx)
                 .notify(in.getStringExtra("id").hashCode(), nb.build());
 
-        String fStr = in.getStringExtra("frequency");
-        if ("MONTHLY".equals(fStr)) {
-            long next = System.currentTimeMillis();
-            java.util.Calendar cal = java.util.Calendar.getInstance();
-            cal.setTimeInMillis(next);
-            cal.add(java.util.Calendar.MONTH, 1);
+        /* ── reschedule for repeat types ───────────────────────── */
+        Calendar next = Calendar.getInstance();
+        next.setTimeInMillis(in.getLongExtra("triggerAt", System.currentTimeMillis()));
 
-            Reminder tmp = new Reminder(
-                    in.getStringExtra("id"),
-                    cal.getTimeInMillis(),
-                    in.getStringExtra("msg"),
-                    Reminder.Frequency.MONTHLY);
-            ReminderScheduler.schedule(ctx, tmp);
+        String freq = in.getStringExtra("frequency");
+        if (freq == null) freq = "ONCE";      // safety default
+        switch (freq) {
+            case "DAILY":   next.add(Calendar.DAY_OF_YEAR, 1);  break;
+            case "WEEKLY":  next.add(Calendar.WEEK_OF_YEAR, 1); break;
+            case "MONTHLY": next.add(Calendar.MONTH,         1); break;
+            default:        return; // ONCE – nothing more to schedule
         }
+
+        Reminder nxt = new Reminder(
+                in.getStringExtra("id"),
+                next.getTimeInMillis(),
+                in.getStringExtra("msg"),
+                Reminder.Frequency.valueOf(freq));
+
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document("devUser123")
+                .collection("reminders");
+        ReminderScheduler.schedule(ctx, nxt);
     }
 }

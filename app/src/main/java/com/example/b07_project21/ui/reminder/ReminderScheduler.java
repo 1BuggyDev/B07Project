@@ -12,11 +12,12 @@ public class ReminderScheduler {
         Intent i = new Intent(ctx, ReminderReceiver.class)
                 .putExtra("id",  r.getId())
                 .putExtra("msg", r.getMessage())
-                .putExtra("frequency", r.getFrequency().name());
+                .putExtra("frequency", r.getFrequency().name())
+                .putExtra("triggerAt", r.getTriggerAt());
         PendingIntent pi = PendingIntent.getBroadcast(
                 ctx, r.getId().hashCode(), i, PendingIntent.FLAG_IMMUTABLE);
 
-        AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+        /*AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 
         switch (r.getFrequency()) {
             case ONCE:
@@ -44,7 +45,13 @@ public class ReminderScheduler {
                         AlarmManager.INTERVAL_DAY * 30, // approx.
                         pi);
                 break;
-        }
+        }*/
+
+        /* One-shot, *exact* alarm for every frequency */
+        AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+        am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                r.getTriggerAt(),
+                pi);
     }
 
     public static void cancel(Context ctx, Reminder r) {
