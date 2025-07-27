@@ -1,5 +1,6 @@
 package com.example.b07_project21.ui.reminder;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,7 +183,9 @@ public class ReminderListFragment extends Fragment {
         }
 
         promptText(timestamp, (ts, msg) -> {
-            Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg);
+            // TODO: replace Frequency.NONE with the user’s pick from your UI
+            Reminder.Frequency pick = Reminder.Frequency.ONCE;
+            Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg, pick);
             col.document(r.getId()).set(r)
                     .addOnSuccessListener(a -> {
                         ReminderScheduler.schedule(requireContext(), r);
@@ -207,8 +210,13 @@ public class ReminderListFragment extends Fragment {
         promptText(newTime, (ts, msg) -> {
             original.setTriggerAt(ts);
             original.setMessage(msg);
+            // TODO: also call original.setFrequency(pick) after your UI
             col.document(original.getId())
-                    .update("triggerAt", ts, "message", msg)
+                    .update(
+                            "triggerAt", ts,
+                            "message", msg,
+                            "frequency", original.getFrequency().name()
+                    )
                     .addOnSuccessListener(a -> {
                         ReminderScheduler.schedule(requireContext(), original);
                         Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
@@ -234,6 +242,31 @@ public class ReminderListFragment extends Fragment {
                 .setView(input)
                 .setPositiveButton("Save", (d, w) -> cb.accept(ts,
                         input.getText() != null ? input.getText().toString().trim() : ""))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private interface FrequencyCallback {
+        void onFrequencyChosen(long timestamp, Reminder.Frequency freq);
+    }
+
+    /** Shows a dialog to pick ONCE/DAILY/WEEKLY/MONTHLY */
+    private void promptFrequency(long ts, FrequencyCallback cb) {
+        String[] options = {"Once", "Daily", "Weekly", "Monthly"};
+        Reminder.Frequency[] freqs = {
+                Reminder.Frequency.ONCE,
+                Reminder.Frequency.DAILY,
+                Reminder.Frequency.WEEKLY,
+                Reminder.Frequency.MONTHLY
+        };
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Repeat?")
+                .setSingleChoiceItems(options, 0, null)
+                .setPositiveButton("Next", (d, w) -> {
+                    int sel = ((AlertDialog) d).getListView().getCheckedItemPosition();
+                    cb.onFrequencyChosen(ts, freqs[sel]);
+                })
                 .setNegativeButton("Cancel", null)
                 .show();
     }

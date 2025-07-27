@@ -17,7 +17,7 @@
 
     <!-- Support Page -->
     <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
-  
+
     <!-- Bottom Buttons -->
     <string name="exit">Exit App</string>
     <string name="empty"> </string>
@@ -112,4 +112,5 @@
     <string name="add_reminder">Add reminder</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="frequency_prompt">Choose repeat interval</string>
 </resources>
