@@ -73,10 +73,11 @@ public class SafetyFragment extends Fragment implements AccountListener, DataLis
             @NonNull
             @Override
             public tipHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                // creates a new TextView and sets padding and font size
+                // creates a new TextView and sets padding and font size and color
                 TextView tv = new TextView(parent.getContext());
-                tv.setPadding(16, 16, 16, 16);
+                tv.setPadding(16, 8, 8, 16);
                 tv.setTextSize(16);
+                //tv.setTextColor(getResources().getColor(R.color.black));
                 return new tipHolder(tv);  // returns wrapped text in the tips holder
             }
             // displays data at specified position
