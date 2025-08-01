@@ -1,0 +1,315 @@
+{
+  "q 1":
+  [
+    {
+      "question":"Which best describes your situation?",
+      "id":"id 1"
+    }
+  ],
+  "id 1":
+  [
+    {
+      "tip 1":"Keep this plan updated, and remember you can always reach out if things escalate."
+    },
+    {
+      "tip 2":"Start packing small items now so you’re ready when you decide to leave."
+    },
+    {
+      "tip 3":"It's normal to feel unsettled, refer back to this plan whenever you need a safety reminder."
+    }
+  ],
+
+  "q 2":
+  [
+    {
+      "question":"What city do you live in?",
+      "id":"id 2"
+    }
+  ],
+  "id 2":
+  [
+    {
+      "tip":"Save the local support numbers for {city} in your phone’s speed-dial so you can call immediately if you need help."
+    }
+  ],
+
+  "q 3":
+  [
+    {
+      "question":"Which room in your home feels the safest if you need to get away quickly?",
+      "id":"id 3"
+    }
+  ],
+  "id 3":
+  [
+    {
+      "tip":"Keep your essentials (phone, keys, and a small flashlight) in {safe_room} so you can grab them instantly when you need to leave."
+    }
+  ],
+
+  "q 4":
+  [
+    {
+      "question":"Who do you live with?",
+      "id":"id 4"
+    }
+  ],
+  "id 4":
+  [
+    {
+      "tip 1":"Let those you live with: {family/roommates} know your safe room and cue‐word so they can support you in an emergency."
+    },
+    {
+      "tip 2":"Since you live alone, identify a trusted neighbor or friend and share your safe room location with them."
+    },
+    {
+      "tip 3":"Because you live with your partner, keep your safety plan hidden (in {safe_room}), and consider storing a digital copy in a password-protected note they won’t see."
+    }
+  ],
+
+  "q 5":
+  [
+    {
+      "question":"Do you have children?",
+      "id":"id 5"
+    }
+  ],
+  "id 5":
+  [
+    {
+      "tip 1":"Practice your safety plan with your children so that when they hear {code_word}, they know exactly what to do."
+    },
+    {
+      "tip 2":"Even without children, it helps to identify a second safe space in your home."
+    }
+  ],
+
+  "q 6":
+  [
+    {
+      "question":"What is your family's safety code word?",
+      "id":"id 6"
+    }
+  ],
+
+  "Which best describes your situation?":"",
+  "What city do you live in?":"",
+  "Which room in your home feels the safest if you need to get away quickly?":"",
+  "Who do you live with?":"",
+  "Do you have children?":"",
+  "What is your family's safety code word?":"",
+
+  "q 7":
+  [
+    {
+      "question":"Which form(s) of abuse are you experiencing?",
+      "id":"id 7"
+    }
+  ],
+  "id 7":
+  [
+    {
+      "tip":"If you face {abuse_type} abuse, remember you don’t have to face it alone. Reach out to your emergency contact right away."
+    }
+  ],
+
+  "q 8":
+  [
+    {
+      "question":"Are you recording the incidents (dates, times, details)?",
+      "id":"id 8"
+    }
+  ],
+  "id 8":
+  [
+    {
+      "tip 1":"Log each incident (date, time, and a brief note) so you have clear records if needed later."
+    },
+    {
+      "tip 2":"Even brief notes on your phone can be helpful. Start logging today."
+    }
+  ],
+
+  "q 9":
+  [
+    {
+      "question":"Name one person you can call immediately in an emergency.",
+      "id":"id 9"
+    }
+  ],
+  "id 9":
+  [
+    {
+      "tip":"Save {contact_name} in your phone under a code-word so you can quietly call them when you need help."
+    }
+  ],
+
+  "Which form(s) of abuse are you experiencing?":"",
+  "Are you recording the incidents (dates, times, details)?":"",
+  "Name one person you can call immediately in an emergency":"",
+
+  "q 10":
+  [
+    {
+      "question":"When do you plan to leave?",
+      "id":"id 10"
+    }
+  ],
+  "id 10":
+  [
+    {
+      "tip":"Set a real target {leave_timing} and pack one essential item each day until you’re ready."
+    }
+  ],
+
+  "q 11":
+  [
+    {
+      "question":"Do you have a go-bag packed with essentials?",
+      "id":"id 11"
+    }
+  ],
+  "id 11":
+  [
+    {
+      "tip 1":"Great! Keep your go-bag in a hidden spot so you can grab it quickly."
+    },
+    {
+      "tip 2":"Pack a simple go-bag today with essentials like your ID, some cash, and a charger."
+    }
+  ],
+
+  "q 12":
+  [
+    {
+      "question":"Where do you keep emergency cash or cards?",
+      "id":"id 12"
+    }
+  ],
+  "id 12":
+  [
+    {
+      "tip":"Stash some cash and a spare card in {money_location}, a spot your partner won’t suspect."
+    }
+  ],
+
+  "q 13":
+  [
+    {
+      "question":"Have you identified a safe place to stay?",
+      "id":"id 13"
+    }
+  ],
+  "id 13":
+  [
+    {
+      "tip 1":"Make sure {temp_shelter} knows you may arrive unexpectedly and how to contact you."
+    },
+    {
+      "tip 2":"Reach out to Victim Services Toronto or a trusted friend now to secure a shelter option before you leave."
+    }
+  ],
+
+  "q 14":
+  [
+    {
+      "question":"Where do you plan to stay?",
+      "id":"id 14"
+    }
+  ],
+
+  "When do you plan to leave?":"",
+  "Do you have a go-bag packed with essentials?":"",
+  "Where do you keep emergency cash or cards?":"",
+  "Have you identified a safe place to stay?":"",
+  "Where do you plan to stay?":"",
+
+  "q 15":
+  [
+    {
+      "question":"Has the abuser continued any contact?",
+      "id":"id 15"
+    }
+  ],
+  "id 15":
+  [
+    {
+      "tip 1":"Since you’ve heard from them, stay vigilant and keep your protection order handy if you have one."
+    },
+    {
+      "tip 2":"Even without contact, keep your doors locked and your phone on in case you need to call 911."
+    }
+  ],
+
+  "q 16":
+  [
+    {
+      "question":"Do you have a protection order? If yes, which type?",
+      "id":"id 16"
+    }
+  ],
+  "id 16":
+  [
+    {
+      "tip 1":"Carry your {legal_order} at all times and share copies with anyone who needs to know."
+    },
+    {
+      "tip 2":"Consider applying for a protection order; it can help deter unwanted contact."
+    }
+  ],
+
+  "q 17":
+  [
+    {
+      "question":"What legal order do you have?",
+      "id":"id 17"
+    }
+  ],
+
+  "q 18":
+  [
+    {
+      "question":"Are you using any safety tools (cameras, door alarms)?",
+      "id":"id 18"
+    }
+  ],
+  "id 18":
+  [
+    {
+      "tip 1":"Make sure your {equipment} is in working order and placed where you’ll notice it."
+    },
+    {
+      "tip 2":"Consider installing a simple door alarm or camera to alert you to unexpected entry."
+    }
+  ],
+
+  "q 19":
+  [
+    {
+      "question":"What safety tools are you using?",
+      "id":"id 19"
+    }
+  ],
+
+  "Has the abuser continued any contact?":"",
+  "Do you have a protection order? If yes, which type?":"",
+  "What legal order do you have?":"",
+  "Are you using any safety tools (cameras, door alarms)?":"",
+  "What safety tools are you using?":"",
+
+  "q 20":
+  [
+    {
+      "question":"Which type of support would help most right now?",
+      "id":"id 20"
+    }
+  ],
+  "id 20":
+  [
+    {
+      "tip":"Reach out to {support_choice} - they can offer the specialized help you need right now."
+    }
+  ],
+
+  "Which type of support would help most right now?":""
+}

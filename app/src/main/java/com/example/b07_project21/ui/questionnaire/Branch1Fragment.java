@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,18 +19,53 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07_project21.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * This class controls the activity for the questionnaire branch 1 questions page
+ * The class has fields to keep track of the user's answers to the questions
+ * The class methods control which page the user goes to based on the button clicked
+ */
 public class Branch1Fragment extends Fragment {
+    /**
+     * Fields for the page's buttons and for questionnaire aspects
+     */
     private LinearLayout leftButton, rightButton;
     private int situation, live_status;
     private String city, safe_room, children, code_word, abuse_status="NNNN", recording;
     private CheckBox box1, box2, box3, box4, box5, box6;
     private EditText contact;
 
-
+    /**
+     * Method acts as a constructor for the class, initializes the initial view of the page
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     * @return root view of the page
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // inflates view
         View root = inflater.inflate(R.layout.fragment_questionnaire_branch_1, container, false);
 
+        // load textbox
+        TextView questionTextView1 = root.findViewById(R.id.branch1_question_1);
+        TextView questionTextView2 = root.findViewById(R.id.branch1_question_2);
+        TextView questionTextView3 = root.findViewById(R.id.branch1_question_3);
+
+        // get text titles
+        loadQuestions(questionTextView1, questionTextView2, questionTextView3);
+
+        // get information from the bundle
         if (getArguments() != null) {
             situation = getArguments().getInt("situation");  // 1, 2, 3
             city = getArguments().getString("selected_city");  // "Toronto", ...
@@ -79,6 +115,56 @@ public class Branch1Fragment extends Fragment {
         return root;
     }
 
+    /**
+     * Method loads the questions to the screen
+     * @param questionTextView1 question 1
+     * @param questionTextView2 question 2
+     * @param questionTextView3 question 3
+     */
+    private void loadQuestions(TextView questionTextView1, TextView questionTextView2, TextView questionTextView3)
+    {
+        try {
+            // load JSON file
+            JSONObject json = loadJSONFromAsset("questions.json");
+
+            // Read "question" from questions
+            JSONArray qArray1 = json.getJSONArray("q 7");
+            String questionText1 = qArray1.getJSONObject(0).getString("question");
+            JSONArray qArray2 = json.getJSONArray("q 8");
+            String questionText2 = qArray2.getJSONObject(0).getString("question");
+            JSONArray qArray3 = json.getJSONArray("q 9");
+            String questionText3 = qArray3.getJSONObject(0).getString("question");
+
+            // Set it to the TextView
+            questionTextView1.setText(questionText1);
+            questionTextView2.setText(questionText2);
+            questionTextView3.setText(questionText3);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            questionTextView1.setText("Error loading question.");
+            questionTextView2.setText("Error loading question.");
+            questionTextView3.setText("Error loading question.");
+        }
+    }
+
+    /**
+     * Method to get data from the JSON file
+     * @param filename
+     * @return JSONObject retrieves information from the JSON file
+     * @throws IOException
+     * @throws JSONException
+     */
+    private JSONObject loadJSONFromAsset(String filename) throws IOException, JSONException {
+        InputStream is = getContext().getAssets().open(filename);
+        int size = is.available();
+        byte[] buffer = new byte[size];
+        is.read(buffer);
+        is.close();
+        return new JSONObject(new String(buffer, "UTF-8"));
+    }
+
+    // update boxes based on clicks
     private void trackAbuseBoxes() {
         box1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -125,6 +211,7 @@ public class Branch1Fragment extends Fragment {
         });
     }
 
+    // updates boxes based on clicks
     private void maintainBoxYNIntegrity() {
         box5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -147,6 +234,7 @@ public class Branch1Fragment extends Fragment {
         });
     }
 
+    // check question answered
     private int countBoxYNIntegrity() {
         int count = 0;
         if (box5.isChecked()) {
@@ -158,6 +246,7 @@ public class Branch1Fragment extends Fragment {
         return count;
     }
 
+    // check question answered
     private int checkAbuseValid() {
         if (getAbuseStatus().equals("NNNN")) {
             return 0;
@@ -165,6 +254,7 @@ public class Branch1Fragment extends Fragment {
         return 1;
     }
 
+    // check question answered
     private int checkContactValid() {
         if (getContact().isEmpty()) {
             return 0;
@@ -172,18 +262,21 @@ public class Branch1Fragment extends Fragment {
         return 1;
     }
 
+    // get variable information
     private String getAbuseStatus() {
         return abuse_status;
     }
-
     private String getRecording() {
         return recording;
     }
-
     private String getContact() {
         return contact.getText().toString().trim();
     }
 
+    /**
+     * Method bundles the information given by the user to be passed to the next page
+     * @return Bundle information needed to be passed to the next page
+     */
     private Bundle makeBundle() {
         Bundle b = new Bundle();
         // bundle to pass data
@@ -202,6 +295,10 @@ public class Branch1Fragment extends Fragment {
         return b;
     }
 
+    /**
+     * This method acts as a deconstructor for the view
+     * Destroys the view and sets button fields to null
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
