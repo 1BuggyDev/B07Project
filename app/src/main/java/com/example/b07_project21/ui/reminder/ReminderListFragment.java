@@ -186,15 +186,15 @@ public class ReminderListFragment extends Fragment {
                 promptText(firstTs, (ts, msg) -> {
                     Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg, pick);
                     col.document(r.getId()).set(r)
-                        .addOnSuccessListener(a -> {
-                            ReminderScheduler.schedule(requireContext(), r);
-                            Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
-                                    .show();
+                            .addOnSuccessListener(a -> {
+                                ReminderScheduler.schedule(requireContext(), r);
+                                Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
+                                        .show();
                             }).
-                        addOnFailureListener(e ->
-                            Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
-                                    .show()
-                    );
+                            addOnFailureListener(e ->
+                                    Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
+                                            .show()
+                            );
                 })
         );
     }
