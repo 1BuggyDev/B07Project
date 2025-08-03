@@ -25,8 +25,9 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // The new layout already has all the content set in XML
+        // No need to programmatically set text since it's all defined in the layout
+        
         return root;
     }
 

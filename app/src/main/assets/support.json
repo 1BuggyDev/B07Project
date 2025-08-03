@@ -1,0 +1,101 @@
+{
+    "Toronto":
+    [
+        {
+            "title": "24/7 Crisis Line",
+            "info": "Toronto Victim Services: 416-808-7066"
+        },
+        {
+            "title": "Find a Shelter",
+            "info": "ShelterSafe: https://sheltersafe.ca/ontario/",
+            "info2": "Toronto Services: https://www.torontocentralhealthline.ca/listServices.aspx?id=10714"
+        },
+        {
+            "title": "Get Legal Aid",
+            "info": "Legal Aid Ontario: https://www.legalaid.on.ca/services/domestic-abuse"
+        },
+        {
+            "title": "Submit a report",
+            "info": "Police (Non-Emergency): 416-808-2222"
+        }
+    ],
+    "Vancouver":
+    [
+        {
+            "title": "24/7 Helpline",
+            "info": "VictimLinkBC: 1-800-563-0808"
+        },
+        {
+            "title": "Find a Shelter",
+            "info": "ShelterSafe: https://sheltersafe.ca/british-columbia/",
+            "info2": "Domestic Shelters: https://www.domesticshelters.org/help/bc/vancouver"
+        },
+        {
+            "title": "Get Legal Aid",
+            "info": "Legal Aid BC: https://legalaid.bc.ca"
+        },
+        {
+            "title": "Submit a report",
+            "info": "Police (Non-Emergency): 604-717-3321"
+        }
+    ],
+    "Edmonton":
+    [
+        {
+            "title": "24/7 Family Violence Info Line",
+            "info": "Call or text: 780-310-1818"
+        },
+        {
+            "title": "Find a Shelter",
+            "info": "ShelterSafe: https://sheltersafe.ca/alberta/",
+            "info2": "Domestic Shelters: https://www.domesticshelters.org/help/ab/edmonton"
+        },
+        {
+            "title": "Get Legal Aid",
+            "info": "Legal Aid AB: https://www.legalaid.ab.ca/services/family-violence-matters/"
+        },
+        {
+            "title": "Submit a report",
+            "info": "Police (Non-Emergency): 780-423-4567"
+        }
+    ],
+    "Calgary":
+    [
+        {
+            "title": "24/7 Family Violence Info Line",
+            "info": "Call or text: 780-310-1818"
+        },
+        {
+            "title": "Find a Shelter",
+            "info": "ShelterSafe: https://sheltersafe.ca/alberta/"
+        },
+        {
+            "title": "Get Legal Aid",
+            "info": "Calgary Legal Guidance: https://clg.ab.ca"
+        },
+        {
+            "title": "Police (Non-Emergency)",
+            "info": "Submit a report: 403-266-1234"
+        }
+    ],
+    "Saskatoon":
+    [
+        {
+            "title": "24/7 Helpline",
+            "info": "YWCA: 306-244-2844"
+        },
+        {
+            "title": "Find a Shelter",
+            "info": "Saskatoon Interval House: https://saskatoonintervalhouse.org"
+        },
+        {
+            "title": "Get Legal Aid",
+            "info": "Pro Bono Law: https://pblsask.ca",
+            "info2": "Legal Aid SK: https://legalaid.sk.ca"
+        },
+        {
+            "title": "Police (Non-Emergency)",
+            "info": "Submit a report: 306-975-8300"
+        }
+    ]
+}
