@@ -1,18 +1,25 @@
 package com.example.b07_project21;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.LinearLayout;
 
+import com.example.b07_project21.databinding.FragmentEnterMenuBinding;
+import com.example.b07_project21.ui.enter_screen.EnterScreenFragment;
 import com.google.android.material.navigation.NavigationView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -31,11 +38,32 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import com.example.b07_project21.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+
+import dataAccess.DataListener;
+import dataAccess.DatabaseAccess;
+import dataAccess.Document;
+import dataAccess.EmergencyContact;
+import dataAccess.LoginManager;
+import dataAccess.Pair;
+import dataAccess.PinManager;
+import dataAccess.StorageAccess;
+import dataAccess.infoType;
+import testing.TestClassC;
+import testing.TestClassD;
+import testing.UsageTests;
+import testing.UsageTests2;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private FragmentEnterMenuBinding enterMenuBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 exitToGoogle();
                 return true;
             } else {
-                // Handle other navigation items normally
                 return NavigationUI.onNavDestinationSelected(item, navController);
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

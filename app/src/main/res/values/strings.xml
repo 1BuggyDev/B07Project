@@ -25,6 +25,13 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
 
+    <!--Enter Screen buttons-->
+    <string name="EmailLoginButton">Login with Email</string>
+    <string name="PinLoginButton">Login with Pin</string>
+    <string name="SignupButton">Signup</string>
+    <string name="password_requirements">Password must have:\nAt least 8 characters\nAt least one lowercase and one uppercase letter\nAt least one number</string>
+    string>
+
     <!-- City Array -->
     <string-array name="cities">
         <item>Toronto</item>
