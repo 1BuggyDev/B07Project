@@ -19,8 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class FirebaseSignupFragment extends Fragment {
+import dataAccess.AccountListener;
+import dataAccess.LoginManager;
+
+public class FirebaseSignupFragment extends Fragment implements AccountListener {
     FragmentFirebaseSignupBinding binding;
     String curPassword;
     String reenter;
@@ -119,9 +123,15 @@ public class FirebaseSignupFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onEmailLogin(FirebaseUser user) {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.action_to_pin_creation);
+    }
+
     private void attemptSignup() {
         if(curPassword.equals(reenter) && isPasswordValid(curPassword) == null) {
-            Fragment obj = this;
+            FirebaseSignupFragment obj = this;
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.createUserWithEmailAndPassword(binding.EmailAddress.getText().toString(), curPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -132,8 +142,7 @@ public class FirebaseSignupFragment extends Fragment {
                         Log.d("Signup", auth.getCurrentUser().getUid());
                         Log.d("Signup", auth.getUid());
                         binding.MissingRequirements.setText(msg);
-                        NavController navController = NavHostFragment.findNavController(obj);
-                        navController.navigate(R.id.action_to_pin_creation);
+                        LoginManager.attemptLogin(binding.EmailAddress.getText().toString(), curPassword, obj);
                     } else {
                         Log.d("Signup", "failure");
                         String msg = "Could not create account.\nPlease verify your email address is correct";
@@ -174,15 +183,5 @@ public class FirebaseSignupFragment extends Fragment {
         }
 
         return null;
-    }
-
-    private int search(char[] arr, char item) {
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] == item) {
-                return i;
-            }
-        }
-
-        return -1;
     }
 }

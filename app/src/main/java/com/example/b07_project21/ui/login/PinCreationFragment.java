@@ -126,8 +126,11 @@ public class PinCreationFragment extends Fragment implements DataListener {
     }
 
     private String verifyPin(String pin) {
-        //TODO - pin requirements
-        return null;
+        if(pin.length() == 4 || pin.length() == 6) {
+            return null;
+        }
+
+        return "Pin must be 4 or 6 digits long";
     }
 
     private void setPin() {
