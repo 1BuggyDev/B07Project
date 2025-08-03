@@ -38,26 +38,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import com.example.b07_project21.databinding.ActivityMainBinding;
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-
-import dataAccess.DataListener;
-import dataAccess.DatabaseAccess;
-import dataAccess.Document;
-import dataAccess.EmergencyContact;
-import dataAccess.LoginManager;
-import dataAccess.Pair;
-import dataAccess.PinManager;
-import dataAccess.StorageAccess;
-import dataAccess.infoType;
-import testing.TestClassC;
-import testing.TestClassD;
-import testing.UsageTests;
-import testing.UsageTests2;
 
 public class MainActivity extends AppCompatActivity {
 
