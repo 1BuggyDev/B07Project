@@ -23,13 +23,8 @@
         android:textColor="@color/black"
 
         android:gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/personal_safety_plan"
-        android:textSize="24sp"
-        android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginTop="24dp"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/safety_paragraph_help"
