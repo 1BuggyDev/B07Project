@@ -22,6 +22,7 @@ import com.example.b07_project21.ui.login.PinLoginFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import dataAccess.LoginManager;
 import dataAccess.PinManager;
 
 public class EnterScreenFragment extends Fragment {
@@ -31,6 +32,7 @@ public class EnterScreenFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d("Login", "EnterScreenFragment.java onCreateView ran");
+
         binding = FragmentEnterMenuBinding.inflate(LayoutInflater.from(getContext()));
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
