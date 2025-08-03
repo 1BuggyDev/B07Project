@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private FragmentEnterMenuBinding enterMenuBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
