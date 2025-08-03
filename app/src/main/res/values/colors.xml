@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Modern Minimalist Pink-Cream Palette -->
+    <color name="pink_cream_light">#FFF8F5</color>
+    <color name="pink_cream_medium">#FFF0E6</color>
+    <color name="pink_cream_warm">#FFE4D6</color>
+    <color name="pink_cream_deep">#FFD6C7</color>
+    <color name="cream_white">#FFF5F0</color>
+    <color name="soft_grey">#F5F5F5</color>
+    
+    <!-- Legacy colors (keeping for compatibility) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
