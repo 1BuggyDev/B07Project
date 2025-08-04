@@ -86,18 +86,24 @@ public class IntroFragment extends Fragment implements AccountListener, DataList
 
     /**
      * This method attempts to set the static field's value
-     * Method attempts to log into the user's account to access data
+     * Method attempts to log into the user's account to access data and set value
      */
+    private void setQuestionnaireValue() {
+        DatabaseAccess.readData(infoType.ANSWER, this);
+    }
+
+    /*
     private void setQuestionnaireValue() {
         // tries to log into the user's account
         LoginManager.attemptLogin("maxwang972@gmail.com", "B07Test", this);
     }
 
-    /**
+    **
      * This method based on the user, tries to access the database for the user's data
      * Method tries to read data, if unsuccessful, sets questionnaire completion status to false
      * @param user the FirebaseUser, or null if the login failed
-     */
+     **
+
     public void onEmailLogin(FirebaseUser user) {
         // checks if the user is not null, if so, tries to access database
         if (user != null) {
@@ -106,7 +112,7 @@ public class IntroFragment extends Fragment implements AccountListener, DataList
         } else {
             IntroFragment.questionnaireCompleted = false;
         }
-    }
+    }*/
 
     /**
      * Method access Firebase data and sets the questionnaire completion status accordingly

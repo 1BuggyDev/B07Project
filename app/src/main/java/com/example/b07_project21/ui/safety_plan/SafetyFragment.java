@@ -107,17 +107,7 @@ public class SafetyFragment extends Fragment implements AccountListener, DataLis
      * Method attempts to log into the user's account to access data
      */
     private void getValues() {
-        LoginManager.attemptLogin("maxwang972@gmail.com", "B07Test", this);
-    }
-
-    /**
-     * This method based on the user, tries to access the database for the user's data
-     * @param user the FirebaseUser, or null if the login failed
-     */
-    public void onEmailLogin(FirebaseUser user) {
-        if (user != null) {
-            DatabaseAccess.readData(infoType.ANSWER, this);  // issue
-        }
+        DatabaseAccess.readData(infoType.ANSWER, this);
     }
 
     /**
