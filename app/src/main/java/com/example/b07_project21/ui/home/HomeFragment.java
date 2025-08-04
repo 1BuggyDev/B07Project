@@ -26,23 +26,9 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-       String welcomeText =
-                "Welcome to the Safety Planning App.\n\n" +
-                        "This tool is built on Victim Services Toronto’s framework. " +
-                        "Use it to assess risk, build a flexible safety plan, and connect with support.\n\n" +
-                        "How to use:\n" +
-                        "• Left menu:\n" +
-                        "    – Safety Plan: create or update your personal plan.\n" +
-                        "    – Questionnaire: answer guided questions for tailored tips.\n" +
-                        "    – Emergency Info: save safe locations, contacts, documents.\n" +
-                        "    – Support Connection: find local hotlines, shelters, legal aid.\n" +
-                        "    – Notifications: set reminders to review your plan.\n" +
-                        "• Exit App (bottom): tap any time for a quick, discreet exit.\n\n" +
-                        "All data stays private on your device.";
-
-        binding.textHome.setText(welcomeText);
-        // Enable scrolling of links (if you ever add any URL spans)
-        binding.textHome.setMovementMethod(LinkMovementMethod.getInstance());
+        // The new layout already has all the content set in XML
+        // No need to programmatically set text since it's all defined in the layout
+        
         return root;
     }
 

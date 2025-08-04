@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="100dp">
+    android:layout_marginBottom="100dp"
+    android:background="@drawable/modern_pink_cream_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
             android:background="@drawable/rounded_warning_box"
             android:text="@string/support_warning"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium" />
 
         <Spinner
             android:id="@+id/supportSpinner"
