@@ -1,6 +1,7 @@
 package com.example.b07_project21.ui.home;
 
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

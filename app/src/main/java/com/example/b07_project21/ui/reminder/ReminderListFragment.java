@@ -1,9 +1,11 @@
 package com.example.b07_project21.ui.reminder;
 
+import androidx.appcompat.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_project21.R;
+import com.google.android.gms.common.util.BiConsumer;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.firestore.CollectionReference;
@@ -178,17 +182,21 @@ public class ReminderListFragment extends Fragment {
             return;
         }
 
-        Reminder r = new Reminder(UUID.randomUUID().toString(), timestamp);
-        col.document(r.getId()).set(r)
-                .addOnSuccessListener(a -> {
-                    ReminderScheduler.schedule(requireContext(), r);
-                    Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
-                            .show();
+        promptFrequency(timestamp, (firstTs, pick) ->
+                promptText(firstTs, (ts, msg) -> {
+                    Reminder r = new Reminder(UUID.randomUUID().toString(), ts, msg, pick);
+                    col.document(r.getId()).set(r)
+                            .addOnSuccessListener(a -> {
+                                ReminderScheduler.schedule(requireContext(), r);
+                                Toast.makeText(requireContext(), "Reminder saved", Toast.LENGTH_SHORT)
+                                        .show();
+                            }).
+                            addOnFailureListener(e ->
+                                    Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
+                                            .show()
+                            );
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Save failed", Toast.LENGTH_SHORT)
-                                .show()
-                );
+        );
     }
 
     private void handleEdit(Reminder original, long newTime) {
@@ -199,20 +207,70 @@ public class ReminderListFragment extends Fragment {
             return;
         }
         ReminderScheduler.cancel(requireContext(), original);
-        original.setTriggerAt(newTime);
-        col.document(original.getId()).update("triggerAt", newTime)
-                .addOnSuccessListener(a -> {
-                    ReminderScheduler.schedule(requireContext(), original);
-                    Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
-                            .show();
+        ReminderScheduler.cancel(requireContext(), original);
+        promptFrequency(newTime, (firstTs, pick) ->
+                promptText(firstTs, (ts, msg) -> {
+                    original.setTriggerAt(ts);
+                    original.setMessage(msg);
+                    original.setFrequency(pick);
+                    col.document(original.getId())
+                            .update(
+                                    "triggerAt", ts,
+                                    "message", msg,
+                                    "frequency", original.getFrequency().name()
+                            )
+                            .addOnSuccessListener(a -> {
+                                ReminderScheduler.schedule(requireContext(), original);
+                                Toast.makeText(requireContext(), "Reminder updated", Toast.LENGTH_SHORT)
+                                        .show();
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
+                                            .show()
+                            );
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Update failed", Toast.LENGTH_SHORT)
-                                .show()
-                );
+        );
     }
 
     private interface DateTimeCallback {
         void onDateTimeChosen(long timestamp);
+    }
+
+    /** Prompts for a custom message, then runs cb(timestamp, message) */
+    private void promptText(long ts, BiConsumer<Long,String> cb) {
+        EditText input = new EditText(requireContext());
+        input.setHint("Notification text (optional)");
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Add message")
+                .setView(input)
+                .setPositiveButton("Save", (d, w) -> cb.accept(ts,
+                        input.getText() != null ? input.getText().toString().trim() : ""))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private interface FrequencyCallback {
+        void onFrequencyChosen(long timestamp, Reminder.Frequency freq);
+    }
+
+    /** Shows a dialog to pick ONCE/DAILY/WEEKLY/MONTHLY */
+    private void promptFrequency(long ts, FrequencyCallback cb) {
+        String[] options = {"Once", "Daily", "Weekly", "Monthly"};
+        Reminder.Frequency[] freqs = {
+                Reminder.Frequency.ONCE,
+                Reminder.Frequency.DAILY,
+                Reminder.Frequency.WEEKLY,
+                Reminder.Frequency.MONTHLY
+        };
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Repeat?")
+                .setSingleChoiceItems(options, 0, null)
+                .setPositiveButton("Next", (d, w) -> {
+                    int sel = ((AlertDialog) d).getListView().getCheckedItemPosition();
+                    cb.onFrequencyChosen(ts, freqs[sel]);
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 }
