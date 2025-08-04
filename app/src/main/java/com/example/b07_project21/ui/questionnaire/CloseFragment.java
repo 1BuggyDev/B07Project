@@ -109,12 +109,6 @@ public class CloseFragment extends Fragment implements AccountListener, DataList
 
     // update user data to Firebase
     private void updateData() {
-        // update data to FireBase
-        LoginManager.attemptLogin("maxwang972@gmail.com", "B07Test", this);
-    }
-
-    // update user information to Firebase
-    public void onEmailLogin(FirebaseUser user) {
         // general
         Pair<String> q_done = new Pair<>("Questionnaire done?", "true");  // "true"/"false" (may not exist, so check if exists first)
 
@@ -148,41 +142,41 @@ public class CloseFragment extends Fragment implements AccountListener, DataList
         // follow-up
         Pair<String> f_help = new Pair("Which type of support would help most right now?", Integer.toString(support_status));  // 1 (Counselling), 2 (Legal), 3 (Financial), 4 (Co-parenting) [Strings]
 
-        // adding user data to Firebase if user not null
-        if (user != null) {
-            // general
-            DatabaseAccess.writeData(infoType.ANSWER, q_done);
 
-            // warm-up
-            DatabaseAccess.writeData(infoType.ANSWER, w_situation);
-            DatabaseAccess.writeData(infoType.ANSWER, w_city);
-            DatabaseAccess.writeData(infoType.ANSWER, w_room);
-            DatabaseAccess.writeData(infoType.ANSWER, w_live);
-            DatabaseAccess.writeData(infoType.ANSWER, w_child);
-            DatabaseAccess.writeData(infoType.ANSWER, w_word);
+        // adding user data to Firebase
 
-            // branch 1
-            DatabaseAccess.writeData(infoType.ANSWER, b1_abuse);
-            DatabaseAccess.writeData(infoType.ANSWER, b1_record);
-            DatabaseAccess.writeData(infoType.ANSWER, b1_contact);
+        // general
+        DatabaseAccess.writeData(infoType.ANSWER, q_done);
 
-            // branch 2
-            DatabaseAccess.writeData(infoType.ANSWER, b2_date);
-            DatabaseAccess.writeData(infoType.ANSWER, b2_bag);
-            DatabaseAccess.writeData(infoType.ANSWER, b2_stash);
-            DatabaseAccess.writeData(infoType.ANSWER, b2_temp_status);
-            DatabaseAccess.writeData(infoType.ANSWER, b2_temp_place);
+        // warm-up
+        DatabaseAccess.writeData(infoType.ANSWER, w_situation);
+        DatabaseAccess.writeData(infoType.ANSWER, w_city);
+        DatabaseAccess.writeData(infoType.ANSWER, w_room);
+        DatabaseAccess.writeData(infoType.ANSWER, w_live);
+        DatabaseAccess.writeData(infoType.ANSWER, w_child);
+        DatabaseAccess.writeData(infoType.ANSWER, w_word);
 
-            // branch 3
-            DatabaseAccess.writeData(infoType.ANSWER, b3_contacted);
-            DatabaseAccess.writeData(infoType.ANSWER, b3_order);
-            DatabaseAccess.writeData(infoType.ANSWER, b3_order_type);
-            DatabaseAccess.writeData(infoType.ANSWER, b3_tools);
-            DatabaseAccess.writeData(infoType.ANSWER, b3_tools_type);
+        // branch 1
+        DatabaseAccess.writeData(infoType.ANSWER, b1_abuse);
+        DatabaseAccess.writeData(infoType.ANSWER, b1_record);
+        DatabaseAccess.writeData(infoType.ANSWER, b1_contact);
 
-            // follow
-            DatabaseAccess.writeData(infoType.ANSWER, f_help);
-        }
+        // branch 2
+        DatabaseAccess.writeData(infoType.ANSWER, b2_date);
+        DatabaseAccess.writeData(infoType.ANSWER, b2_bag);
+        DatabaseAccess.writeData(infoType.ANSWER, b2_stash);
+        DatabaseAccess.writeData(infoType.ANSWER, b2_temp_status);
+        DatabaseAccess.writeData(infoType.ANSWER, b2_temp_place);
+
+        // branch 3
+        DatabaseAccess.writeData(infoType.ANSWER, b3_contacted);
+        DatabaseAccess.writeData(infoType.ANSWER, b3_order);
+        DatabaseAccess.writeData(infoType.ANSWER, b3_order_type);
+        DatabaseAccess.writeData(infoType.ANSWER, b3_tools);
+        DatabaseAccess.writeData(infoType.ANSWER, b3_tools_type);
+
+        // follow
+        DatabaseAccess.writeData(infoType.ANSWER, f_help);
     }
 
     /**
