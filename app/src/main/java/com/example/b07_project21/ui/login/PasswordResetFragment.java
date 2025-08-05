@@ -75,8 +75,6 @@ public class PasswordResetFragment extends Fragment {
         String msg = "Sent password reset email to the email above.\nIf you don't see an email, please check your spam inbox.";
         binding.ResetMessage.setText(msg);
         binding.ResetMessage.setTextColor(Color.rgb(0, 0, 0));
-        Log.d("Reset", "Pin removed");
-        PinManager.removePin(getContext());
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
         auth.sendPasswordResetEmail(email);
