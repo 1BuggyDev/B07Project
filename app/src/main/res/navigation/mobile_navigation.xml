@@ -4,7 +4,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/enter_menu">
+    <!--app:startDestination="@+id/nav_home">-->
+
+    <fragment
+        android:id="@+id/enter_menu"
+        android:name="com.example.b07_project21.ui.enter_screen.EnterScreenFragment"
+        android:label="">
+        <action
+            android:id="@+id/action_email_login"
+            app:destination="@+id/email_login_menu"/>
+        <action
+            android:id="@+id/action_pin_login"
+            app:destination="@+id/pin_login_menu"
+            />
+        <action
+            android:id="@+id/action_signup"
+            app:destination="@+id/signup_menu"
+            />
+        </fragment>
+    <fragment
+        android:id="@+id/email_login_menu"
+        android:name="com.example.b07_project21.ui.login.EmailLoginFragment"
+        android:label="Email Login">
+        <action
+            android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"
+            />
+        <action
+            android:id="@+id/action_to_pin_creation"
+            app:destination="@+id/pin_creation_menu"
+            />
+        <action
+            android:id="@+id/action_to_questionnaire"
+            app:destination="@id/nav_questionnaire"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/pin_login_menu"
+        android:name="com.example.b07_project21.ui.login.PinLoginFragment"
+        android:label="Pin Login">
+        <action
+            android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"
+            />
+        <action
+            android:id="@+id/action_to_questionnaire"
+            app:destination="@id/nav_questionnaire"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/signup_menu"
+        android:name="com.example.b07_project21.ui.login.FirebaseSignupFragment"
+        android:label="Signup">
+        <action
+            android:id="@+id/action_to_pin_creation"
+            app:destination="@+id/pin_creation_menu"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/pin_creation_menu"
+        android:name="com.example.b07_project21.ui.login.PinCreationFragment"
+        android:label="Pin Creation">
+        <action
+            android:id="@+id/action_to_home"
+            app:destination="@+id/nav_home"
+            />
+        <action
+            android:id="@+id/action_to_questionnaire"
+            app:destination="@id/nav_questionnaire"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_home"

@@ -10,13 +10,48 @@ public class ReminderScheduler {
     @SuppressLint("ScheduleExactAlarm")
     public static void schedule(Context ctx, Reminder r) {
         Intent i = new Intent(ctx, ReminderReceiver.class)
-                .putExtra("id", r.getId());
+                .putExtra("id",  r.getId())
+                .putExtra("msg", r.getMessage())
+                .putExtra("frequency", r.getFrequency().name())
+                .putExtra("triggerAt", r.getTriggerAt());
         PendingIntent pi = PendingIntent.getBroadcast(
                 ctx, r.getId().hashCode(), i, PendingIntent.FLAG_IMMUTABLE);
 
+        /*AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+
+        switch (r.getFrequency()) {
+            case ONCE:
+                am.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP, r.getTriggerAt(), pi);
+                break;
+            case DAILY:
+                am.setInexactRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        r.getTriggerAt(),
+                        AlarmManager.INTERVAL_DAY,
+                        pi);
+                break;
+            case WEEKLY:
+                am.setInexactRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        r.getTriggerAt(),
+                        AlarmManager.INTERVAL_DAY * 7,
+                        pi);
+                break;
+            case MONTHLY:
+                am.setInexactRepeating(
+                        AlarmManager.RTC_WAKEUP,
+                        r.getTriggerAt(),
+                        AlarmManager.INTERVAL_DAY * 30, // approx.
+                        pi);
+                break;
+        }*/
+
+        /* One-shot, *exact* alarm for every frequency */
         AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-        am.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP, r.getTriggerAt(), pi);
+        am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                r.getTriggerAt(),
+                pi);
     }
 
     public static void cancel(Context ctx, Reminder r) {

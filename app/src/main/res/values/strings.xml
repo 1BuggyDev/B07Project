@@ -1,4 +1,5 @@
 <resources>
+    <!-- Navigation Titles -->
     <string name="app_name">B07 Project 21</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -38,10 +39,20 @@
     <string name="download">Download</string>
 
     <!-- Bottom Buttons -->
+    <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
+  
+    <!-- Bottom Nav Buttons -->
     <string name="exit">Exit App</string>
     <string name="empty"> </string>
     <string name="back">Back</string>
     <string name="next">Next</string>
+
+    <!--Enter Screen buttons-->
+    <string name="EmailLoginButton">Login with Email</string>
+    <string name="PinLoginButton">Login with Pin</string>
+    <string name="SignupButton">Signup</string>
+    <string name="password_requirements">Password must have:\nAt least 8 characters\nAt least one lowercase and one uppercase letter\nAt least one number</string>
+    string>
 
     <!-- City Array -->
     <string-array name="cities">
@@ -113,7 +124,7 @@
     <string name="co_parenting_resources">Co-parenting resources</string>
     <string name="safety_plan_completed">Safety Plan Completed</string>
 
-    <!-- Close -->
+    <!-- Questionnaire Strings / Close -->
     <string name="safety_planning_done">You have successfully completed your personal safety plan
         designed to support you. </string>
     <string name="safety_planning_disclaimer">Disclaimer: This safety plan is a personal tool meant
@@ -124,10 +135,15 @@
         \"Safety Plan\" tab to see it. </string>
     <string name="name_one_person_you_can_call_immediately_in_an_emergency">Name one person you can call immediately in an emergency.</string>
 
+    <!-- Reminders -->
     <string name="menu_reminders">Reminders</string>
     <string name="notif_generic_title">Reminder</string>
     <string name="notif_generic_body">Time to review your plan.</string>
     <string name="add_reminder">Add reminder</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="frequency_prompt">Choose repeat interval</string>
+    
+    <!-- Safety Plan -->
+    <string name="personal_safety_plan">Personal Safety Plan</string>
 </resources>

@@ -139,9 +139,12 @@ public final class StorageAccess {
 
                     ArrayList<Task<StorageMetadata>> metadataProcesses = new ArrayList<>();
 
+                    ArrayList<String> names = new ArrayList<>();
+
                     //Queue both metadata and file data
                     for(StorageReference fileRef: items) {
                         Log.d("FileTest", "file: " + fileRef.getName());
+                        names.add(fileRef.getName());
                         Task<byte[]> readProcess = fileRef.getBytes(fiveMB);
                         Task<StorageMetadata> metadataProcess = fileRef.getMetadata();
                         processes.add(readProcess);
@@ -149,21 +152,27 @@ public final class StorageAccess {
                     }
                     //Wait for metadata to get file creation times
                     ArrayList<Long> times = new ArrayList<Long>();
+                    ArrayList<String> fileTypes = new ArrayList<>();
                     Tasks.whenAllSuccess(metadataProcesses).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
                         @Override
                         public void onSuccess(List<Object> objects) {
                             //store file creation times
                             for(Object o: objects) {
-                                times.add(((StorageMetadata)o).getCreationTimeMillis());
+                                StorageMetadata object = (StorageMetadata) o;
+                                times.add(object.getCreationTimeMillis());
+                                fileTypes.add(object.getContentType());
                             }
 
                             Tasks.whenAllSuccess(processes).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
                                 @Override
                                 public void onSuccess(List<Object> objects) {
+                                    int idx = 0;
                                     //store file data
-                                    ArrayList<byte[]> data = new ArrayList<>();
+                                    ArrayList<FileData> data = new ArrayList<>();
                                     for(Object o: objects) {
-                                        data.add((byte[]) o);
+                                        FileData object = new FileData((byte[]) o, names.get(idx), fileTypes.get(idx));
+                                        data.add(object);
+                                        idx += 1;
                                     }
 
                                     //sort based on metadata times
@@ -197,7 +206,6 @@ public final class StorageAccess {
      * Bubble sort
      * @param data the data to sort
      * @param times an ArrayList containing the metadata creation times
-     * @return data sorted using bubble sort
      */
     protected static <T> void sortByAge(List<T> data, ArrayList<Long> times) {
         for(int i = 0; i < times.size(); i++) {
