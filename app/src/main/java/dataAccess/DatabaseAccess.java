@@ -156,7 +156,6 @@ public final class DatabaseAccess {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(task.isSuccessful()) {
                     dataTree = new DataTree(task.getResult());
-
                     if (obj != null) {
                         obj.onDataReceived(type, dataTree.getData(type));
                     }

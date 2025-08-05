@@ -1,22 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/modern_pink_cream_background"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="24dp">
+
+        <!-- Welcome Header -->
+        <TextView
+            android:id="@+id/welcome_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Welcome to Your Safe Space"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:lineSpacingMultiplier="1.2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/welcome_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="A comforting companion for your journey"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:alpha="0.8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_header" />
+
+        <!-- Main Content Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_content_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/cream_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_subtitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Today's Focus -->
+                <TextView
+                    android:id="@+id/today_focus_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today's Focus"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/today_focus_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Take a moment to breathe deeply and remember that you are stronger than you think. Every step forward, no matter how small, is a victory worth celebrating."
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/black"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Quick Actions -->
+                <TextView
+                    android:id="@+id/quick_actions_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick Actions"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/quick_actions_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Check your safety plan\n• Set a gentle reminder\n• Reach out for support\n• Practice grounding exercises"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="@color/black"
+                    android:lineSpacingMultiplier="1.4" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Encouraging Message -->
+        <TextView
+            android:id="@+id/encouraging_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:text="You are not alone in this journey. Every breath you take is a step toward healing and hope."
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:alpha="0.9"
+            android:lineSpacingMultiplier="1.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_content_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

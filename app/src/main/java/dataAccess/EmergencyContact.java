@@ -4,21 +4,21 @@ package dataAccess;
 public class EmergencyContact extends UserData {
     private String contactName;
     private String relationship;
-    private String phoneNumber;
+    private String contactMethod;
 
     public EmergencyContact() {}
-    public EmergencyContact(String title, String description, String contactName, String relationship, String phoneNumber) {
+    public EmergencyContact(String title, String description, String contactName, String relationship, String contactMethod) {
         super(title, description);
         this.contactName = contactName;
         this.relationship = relationship;
-        this.phoneNumber = phoneNumber;
+        this.contactMethod = contactMethod;
     }
 
-    public EmergencyContact(String title, String description, String filePath, String contactName, String relationship, String phoneNumber) {
+    public EmergencyContact(String title, String description, String filePath, String contactName, String relationship, String contactMethod) {
         super(title, description, filePath);
         this.contactName = contactName;
         this.relationship = relationship;
-        this.phoneNumber = phoneNumber;
+        this.contactMethod = contactMethod;
     }
 
     public String getContactName() {
@@ -37,12 +37,12 @@ public class EmergencyContact extends UserData {
         this.relationship = relationship;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getContactMethod() {
+        return contactMethod;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setContactMethod(String phoneNumber) {
+        this.contactMethod = phoneNumber;
     }
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -105,9 +106,9 @@
         tools:layout="@layout/fragment_safety" />
     <fragment
         android:id="@+id/nav_questionnaire"
-        android:name="com.example.b07_project21.ui.questionnaire.QuestionnaireFragment"
+        android:name="com.example.b07_project21.ui.questionnaire.IntroFragment"
         android:label="@string/questionnaire"
-        tools:layout="@layout/fragment_questionnaire" />
+        tools:layout="@layout/fragment_questionnaire_intro" />
     <fragment
         android:id="@+id/nav_emergency"
         android:name="com.example.b07_project21.ui.emergency_info.EmergencyFragment"
@@ -115,12 +116,53 @@
         tools:layout="@layout/fragment_emergency" />
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.example.b07_project21.ui.notification.NotificationFragment"
-        android:label="@string/notifications"
-        tools:layout="@layout/fragment_notification" />
+        android:name="com.example.b07_project21.ui.reminder.ReminderListFragment"
+        android:label="@string/menu_reminders"
+        tools:layout="@layout/fragment_reminder_list" />
     <fragment
         android:id="@+id/nav_exit"
         android:name="com.example.b07_project21.ui.exit.ExitFragment"
         android:label="@string/exit"
         tools:layout="@layout/fragment_exit" />
+    <!--<fragment
+        android:id="@+id/nav_reminders"
+        android:name="com.example.b07_project21.ReminderListFragment"
+        android:label="@string/menu_reminders"
+        tools:layout="@layout/fragment_reminder_list" />-->
+    <!-- Questionnaire -->
+    <!--<fragment
+        android:id="@+id/nav_questionnaire"
+        android:name="com.example.b07_project21.ui.questionnaire.IntroFragment"
+        android:label="questionnaire intro"
+        tools:layout="@layout/fragment_questionnaire_intro" />-->
+    <fragment
+        android:id="@+id/nav_question_warm"
+        android:name="com.example.b07_project21.ui.questionnaire.WarmFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_warm" />
+    <fragment
+        android:id="@+id/nav_question_branch_1"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch1Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_1" />
+    <fragment
+        android:id="@+id/nav_question_branch_2"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch2Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_2" />
+    <fragment
+        android:id="@+id/nav_question_branch_3"
+        android:name="com.example.b07_project21.ui.questionnaire.Branch3Fragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_branch_3" />
+    <fragment
+        android:id="@+id/nav_question_follow"
+        android:name="com.example.b07_project21.ui.questionnaire.FollowFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_follow" />
+    <fragment
+        android:id="@+id/nav_question_close"
+        android:name="com.example.b07_project21.ui.questionnaire.CloseFragment"
+        android:label="Questionnaire"
+        tools:layout="@layout/fragment_questionnaire_close" />
 </navigation>

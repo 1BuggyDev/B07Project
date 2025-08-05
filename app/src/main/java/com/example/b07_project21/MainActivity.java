@@ -38,32 +38,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import com.example.b07_project21.databinding.ActivityMainBinding;
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-
-import dataAccess.DataListener;
-import dataAccess.DatabaseAccess;
-import dataAccess.Document;
-import dataAccess.EmergencyContact;
-import dataAccess.LoginManager;
-import dataAccess.Pair;
-import dataAccess.PinManager;
-import dataAccess.StorageAccess;
-import dataAccess.infoType;
-import testing.TestClassC;
-import testing.TestClassD;
-import testing.UsageTests;
-import testing.UsageTests2;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private FragmentEnterMenuBinding enterMenuBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // disable nav bar for questionnaire section, use back button to exit to home instead
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.nav_questionnaire) {
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            } else {
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        });
 
         LinearLayout bottomNavButton = findViewById(R.id.bottom_nav_button);
         if (bottomNavButton != null) {
