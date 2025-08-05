@@ -15,6 +15,14 @@ public class FileData {
     }
 
     /**
+     * Gets the file extension
+     * @return the file extension or the file name if it has no extension
+     */
+    public String getExtension() {
+        return name.substring(name.lastIndexOf('.') + 1);
+    }
+
+    /**
      * Returns the file type
      * @return the file type
      */
