@@ -17,6 +17,28 @@
     <string name="notifications">Notifications</string>
 
     <!-- Support Page -->
+    <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in immediate danger.</string>
+
+    <!-- Emergency Information -->
+    <string-array name="emergency_info_list">
+        <item>Documents</item>
+        <item>Contacts</item>
+        <item>Locations</item>
+        <item>Medications</item>
+    </string-array>
+    <string name="document_desc">Add any documents you need to keep safe</string>
+    <string name="contact_desc">Add people to contact in case of an emergency</string>
+    <string name="location_desc">Add safe locations in case of an emergency</string>
+    <string name="medication_desc">Add any medications you need</string>
+    <string name="contact_dialog">Add Emergency Contact</string>
+    <string name="location_dialog">Add Safe Location</string>
+    <string name="medication_dialog">Add Medication</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_relationship">Relationship</string>
+    <string name="hint_contact">Contact Info (e.g. Phone Number)</string>
+    <string name="download">Download</string>
+
+    <!-- Bottom Buttons -->
     <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
   
     <!-- Bottom Nav Buttons -->

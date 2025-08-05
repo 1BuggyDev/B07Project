@@ -93,7 +93,7 @@ public class LoginManager {
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(Task<AuthResult> task) {
                 obj.onAccountCreation(task.isSuccessful());
             }
         });
