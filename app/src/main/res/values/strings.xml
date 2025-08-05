@@ -37,9 +37,6 @@
     <string name="hint_relationship">Relationship</string>
     <string name="hint_contact">Contact Info (e.g. Phone Number)</string>
     <string name="download">Download</string>
-
-    <!-- Bottom Buttons -->
-    <string name="support_warning">⚠︎ Call 911 immediately if you or someone else is in danger.</string>
   
     <!-- Bottom Nav Buttons -->
     <string name="exit">Exit App</string>
