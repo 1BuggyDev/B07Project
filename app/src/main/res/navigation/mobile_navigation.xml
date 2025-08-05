@@ -57,8 +57,8 @@
             app:destination="@id/nav_questionnaire"
             />
         <action
-            android:id="@+id/action_to_password_reset"
-            app:destination="@+id/password_reset_menu"
+            android:id="@+id/action_to_pin_reset"
+            app:destination="@+id/pin_reset_menu"
             />
     </fragment>
     <fragment
@@ -73,7 +73,12 @@
     <fragment
         android:id="@+id/password_reset_menu"
         android:name="com.example.b07_project21.ui.login.PasswordResetFragment"
-        android:label="Password/Pin Reset"
+        android:label="Password Reset"
+        />
+    <fragment
+        android:id="@+id/pin_reset_menu"
+        android:name="com.example.b07_project21.ui.login.PinResetFragment"
+        android:label="Pin Reset"
         />
     <fragment
         android:id="@+id/pin_creation_menu"
