@@ -1,7 +1,5 @@
 package com.example.b07_project21.ui.support;
 
-import android.content.res.AssetManager;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,20 +14,25 @@ import dataAccess.infoType;
 
 public class SupportViewModel extends ViewModel {
 
-    private String city;
+    private final MutableLiveData<String> city;
     private HashMap<String, HashMap<String, String>[]> cityData;
+    private SupportReader cityReader;
 
     public SupportViewModel() {
-        city = "Vancouver"; // temp
-//        CityReader cityReader = new CityReader(this);
-//        DatabaseAccess.readData(infoType.ANSWER, cityReader);
+        city = new MutableLiveData<>();
+        cityReader = new SupportReader(this);
+    }
+
+    /** Updates the user's city from Firebase. */
+    public void updateCity() {
+        DatabaseAccess.readData(infoType.ANSWER, cityReader);
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city.setValue(city);
     }
 
-    public String getCity() {
+    public LiveData<String> getCity() {
         return city;
     }
 
@@ -37,8 +40,8 @@ public class SupportViewModel extends ViewModel {
         return cityData;
     }
 
+    /** Initializes cityData from the contents of support.json. */
     public void initializeCityData(String json) {
-        // takes in contents of support.json and initializes cityData
         Gson gson = new Gson();
         Type type = new TypeToken<HashMap<String, HashMap<String, String>[]>>(){}.getType();
         cityData = gson.fromJson(json, type);

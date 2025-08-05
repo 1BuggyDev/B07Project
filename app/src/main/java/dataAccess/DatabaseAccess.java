@@ -154,10 +154,14 @@ public final class DatabaseAccess {
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                dataTree = new DataTree(task.getResult());
+                if(task.isSuccessful()) {
+                    dataTree = new DataTree(task.getResult());
 
-                if(obj != null) {
-                    obj.onDataReceived(type,  dataTree.getData(type));
+                    if (obj != null) {
+                        obj.onDataReceived(type, dataTree.getData(type));
+                    }
+                } else {
+
                 }
             }
         });
@@ -296,11 +300,13 @@ public final class DatabaseAccess {
 
 
             if(obj == null) {
-                writeRef.updateChildren(updates);
+                writeRef.setValue(dataTree.getData(type));
+                //writeRef.updateChildren(updates);
                 return;
             }
 
-            writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            //writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            writeRef.setValue(dataTree.getData(type)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()) {
@@ -340,10 +346,12 @@ public final class DatabaseAccess {
                 }
                 dataTree.updateData(type, key, newData);
                 if(obj == null) {
-                    writeRef.updateChildren(updates);
+                    //writeRef.updateChildren(updates);
+                    writeRef.setValue(dataTree.getData(type));
                     return;
                 }
-                writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                //writeRef.updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                writeRef.setValue(dataTree.getData(type)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {

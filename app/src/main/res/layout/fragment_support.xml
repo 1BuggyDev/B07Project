@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="100dp">
+    android:layout_marginBottom="100dp"
+    android:requiresFadingEdge="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
             android:padding="15dp"
-            android:background="@drawable/rounded_warning_box"
+            android:background="@drawable/support_warning_box"
             android:text="@string/support_warning"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="15sp" />
