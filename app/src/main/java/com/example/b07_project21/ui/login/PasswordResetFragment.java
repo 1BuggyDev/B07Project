@@ -18,19 +18,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07_project21.R;
-import com.example.b07_project21.databinding.FragmentResetBinding;
+import com.example.b07_project21.databinding.FragmentPasswordResetBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dataAccess.PinManager;
 
 public class PasswordResetFragment extends Fragment {
-    private FragmentResetBinding binding;
+    private FragmentPasswordResetBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d("Reset", "fragment run");
-        binding = FragmentResetBinding.inflate(LayoutInflater.from(getContext()));
+        binding = FragmentPasswordResetBinding.inflate(LayoutInflater.from(getContext()));
 
         createButtonListener();
 

@@ -59,7 +59,7 @@ public class PinLoginFragment extends Fragment implements DataListener {
             @Override
             public void onClick(View view) {
                 NavController navController = NavHostFragment.findNavController(obj);
-                navController.navigate(R.id.action_to_password_reset);
+                navController.navigate(R.id.action_to_pin_reset);
             }
         });
     }
