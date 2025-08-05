@@ -1,6 +1,8 @@
 package com.example.b07_project21.ui.login;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07_project21.R;
 import com.example.b07_project21.databinding.FragmentEmailLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
@@ -31,7 +36,7 @@ public class EmailLoginFragment extends Fragment implements AccountListener, Dat
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentEmailLoginBinding.inflate(LayoutInflater.from(getContext()));
-        createButtonListener();
+        createButtonListeners();
         return binding.getRoot();
     }
 
@@ -40,15 +45,26 @@ public class EmailLoginFragment extends Fragment implements AccountListener, Dat
         super.onDestroyView();
     }
 
-    private void createButtonListener() {
+    private void createButtonListeners() {
         Button loginButton = binding.SubmitEmailPasswordButton;
+        Fragment obj = this;
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
+
+        Button resetButton = binding.forgotPasswordButton;
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(obj);
+                navController.navigate(R.id.action_to_password_reset);
+            }
+        });
     }
+
 
     private void attemptLogin() {
         String email = binding.LoginEmailAddress.getText().toString();

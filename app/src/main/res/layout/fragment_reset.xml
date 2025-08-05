@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pin_login_menu"
+    android:id="@+id/password_reset_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,40 +18,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
-            android:layout_height="283dp"
-            android:text="Login with Pin"
+            android:layout_height="wrap_content"
+            android:text="Password/Pin Reset"
             android:textAlignment="center"
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/PinEnter"
+            android:id="@+id/ResetEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Pin:"
-            android:inputType="numberPassword"
-            android:minHeight="48dp" />
-
-        <Button
-            android:id="@+id/SubmitPinButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login" />
+            android:hint="Email:"
+            android:inputType="textEmailAddress" />
 
         <TextView
-            android:id="@+id/PinLoginFailureMessage"
+            android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="#FF3E3E" />
+            android:minHeight="48dp"
+            android:text="Pin reset can be performed after resetting your password and logging into the app"
+            android:textColor="#020101" />
 
         <Button
-            android:id="@+id/ResetPinButton"
+            android:id="@+id/ResetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reset Pin" />
+            android:text="Send Password Reset Email" />
+
+        <TextView
+            android:id="@+id/ResetMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

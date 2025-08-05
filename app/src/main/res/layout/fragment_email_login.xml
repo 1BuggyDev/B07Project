@@ -54,5 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF2525" />
+
+        <Button
+            android:id="@+id/forgot_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password/Pin" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

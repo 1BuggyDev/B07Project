@@ -16,7 +16,7 @@ public interface FileListener {
      * @param type the type of data this file belongs to
      * @param data the data read (null if an error occurred)
      */
-    default public void onFilesReceived(infoType type, ArrayList<byte[]> data) {}
+    default public void onFilesReceived(infoType type, ArrayList<FileData> data) {}
 
     /**
      * The result of a file upload for a specific piece of UserData

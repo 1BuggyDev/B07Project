@@ -1,6 +1,7 @@
 package com.example.b07_project21.ui.login;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import dataAccess.DataListener;
 import dataAccess.DatabaseAccess;
 import dataAccess.LoginManager;
+import dataAccess.PinManager;
 import dataAccess.infoType;
 
 public class PinLoginFragment extends Fragment implements DataListener {
@@ -28,16 +30,36 @@ public class PinLoginFragment extends Fragment implements DataListener {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPinLoginBinding.inflate(LayoutInflater.from(getContext()));
-        createButtonListener();
+        createButtonListeners();
+
+        if(!PinManager.pinExists(getContext())) {
+            //head back to enter menu, must have reset pin
+            //change history to enter_menu -> email login
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.clearBackStack(R.id.enter_menu);
+            navController.navigate(R.id.enter_menu);
+            navController.navigate(R.id.email_login_menu);
+        }
+
         return binding.getRoot();
     }
 
-    private void createButtonListener() {
+    private void createButtonListeners() {
         Button submitPinButton = binding.SubmitPinButton;
         submitPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Fragment obj = this;
+        Button resetPinButton = binding.ResetPinButton;
+        resetPinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(obj);
+                navController.navigate(R.id.action_to_password_reset);
             }
         });
     }
