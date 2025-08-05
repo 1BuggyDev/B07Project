@@ -21,6 +21,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +36,9 @@ import java.util.UUID;
 public class ReminderListFragment extends Fragment {
     private final CollectionReference col = FirebaseFirestore.getInstance()
             .collection("users")
-            .document("devUser123")
+            .document(FirebaseAuth.getInstance()
+                                  .getCurrentUser()
+                                  .getUid())
             .collection("reminders");
     private final ReminderAdapter adapter = new ReminderAdapter();
 
