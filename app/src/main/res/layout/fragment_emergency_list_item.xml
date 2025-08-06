@@ -36,39 +36,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/edit"
-            android:src="@android:drawable/ic_menu_edit"
+            android:src="@drawable/ic_emergency_edit"
             android:text="@string/edit"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:alpha="0.6"/>
 
         <ImageButton
             android:id="@+id/openButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/open"
-            android:src="@android:drawable/ic_menu_view"
+            android:src="@drawable/ic_emergency_open"
             android:text="@string/open"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:alpha="0.6"/>
 
         <ImageButton
             android:id="@+id/downloadButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/download"
-            android:src="@android:drawable/ic_menu_save"
+            android:src="@drawable/ic_emergency_download"
             android:text="@string/download"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:alpha="0.6"/>
 
         <ImageButton
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/delete"
-            android:src="@android:drawable/ic_menu_delete"
+            android:src="@drawable/ic_emergency_delete"
             android:text="@string/delete"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:alpha="0.6"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
