@@ -1,6 +1,7 @@
 package com.example.b07_project21.ui.support;
 
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -17,9 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.b07_project21.R;
 import com.example.b07_project21.databinding.FragmentSupportBinding;
 
 import java.io.BufferedReader;
@@ -72,8 +75,6 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
 
     /** Sets the spinner to the user's current city from Firebase. */
     private void setCity(String city) {
-//        viewModel.updateCity();
-//        String city = viewModel.getCity().toString();
         if (adapter.getPosition(city) == -1)
             citySelection.setSelection(adapter.getPosition("Toronto"));
         else
@@ -81,7 +82,7 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
         loadText(city);
     }
 
-    /** Loads the support resources of the specified city using TextViews. */
+    /** Loads the support resources of the specified city using CardView with pink background. */
     private void loadText(String city) {
         HashMap<String, HashMap<String, String>[]> cityMap = viewModel.getCityData();
         HashMap<String, String>[] resources = cityMap.get(city);
@@ -91,25 +92,61 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
             return;
         }
         layout.removeAllViews();
+        
         for (HashMap<String, String> resource : resources) {
-            // Get info from hashmap
-            TextView newView = new TextView(requireContext());
+            // Create CardView with pink background
+            CardView cardView = new CardView(requireContext());
+            cardView.setCardBackgroundColor(getResources().getColor(R.color.pink_cream_light));
+            cardView.setRadius(24); // 12dp radius
+            cardView.setCardElevation(8);
+            
+            // Create content container
+            LinearLayout cardContainer = new LinearLayout(requireContext());
+            cardContainer.setOrientation(LinearLayout.VERTICAL);
+            cardContainer.setPadding(20, 20, 20, 20);
+            
+            // Title TextView with bold, dark styling
+            TextView titleView = new TextView(requireContext());
             String title = resource.get("title");
+            titleView.setText(title);
+            titleView.setTextSize(18);
+            titleView.setTextColor(getResources().getColor(R.color.black));
+            titleView.setTypeface(null, Typeface.BOLD);
+            titleView.setPadding(0, 0, 0, 12);
+            titleView.setFontFeatureSettings("sans-serif-medium");
+            
+            // Info TextView with darker, more readable text
+            TextView infoView = new TextView(requireContext());
             String info = resource.get("info");
             if (resource.get("info2") != null) info += "\n" + resource.get("info2");
-            if (title == null || info == null) continue; // something went wrong
-
-            // For hyperlinks/phone numbers
-            newView.setAutoLinkMask(Linkify.ALL);
-            newView.setLinksClickable(true);
-
-            // Text formatting
-            SpannableString text = new SpannableString(title + "\n" + info + "\n");
-            text.setSpan(new AbsoluteSizeSpan(20, true), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            text.setSpan(new AbsoluteSizeSpan(16, true), title.length(), text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            newView.setText(text);
-            newView.setLineSpacing(0f, 1.4f); // not dp
-            layout.addView(newView);
+            infoView.setText(info);
+            infoView.setTextSize(16);
+            infoView.setTextColor(getResources().getColor(R.color.black));
+            infoView.setFontFeatureSettings("sans-serif-medium");
+            infoView.setLineSpacing(0f, 1.4f);
+            
+            // For hyperlinks/phone numbers - make them more prominent
+            infoView.setAutoLinkMask(Linkify.ALL);
+            infoView.setLinksClickable(true);
+            infoView.setLinkTextColor(getResources().getColor(R.color.purple_500));
+            
+            // Add views to card container
+            cardContainer.addView(titleView);
+            cardContainer.addView(infoView);
+            
+            // Add container to CardView
+            cardView.addView(cardContainer);
+            
+            // Set layout parameters for the CardView
+            LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            cardParams.setMargins(0, 12, 0, 12);
+            cardView.setLayoutParams(cardParams);
+            
+            // Add CardView to layout
+            layout.addView(cardView);
         }
     }
 

@@ -82,7 +82,7 @@ public class Branch1Fragment extends Fragment {
         box4 = root.findViewById(R.id.checkbox14);
         trackAbuseBoxes();
 
-        // Q2 spinner (dropdown)
+        // Q2 checkboxes (Yes/No)
         box5 = root.findViewById(R.id.checkbox21);
         box6 = root.findViewById(R.id.checkbox22);
         maintainBoxYNIntegrity();
@@ -98,12 +98,10 @@ public class Branch1Fragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(Branch1Fragment.this);
 
         leftButton.setOnClickListener(v -> {
-            //Toast.makeText(getContext(), "Back to Warm", Toast.LENGTH_SHORT).show();
             navController.navigate(R.id.nav_question_warm);
         });
 
         rightButton.setOnClickListener(v -> {
-            //Toast.makeText(getContext(), "Next to Follow", Toast.LENGTH_SHORT).show();
             if (checkAbuseValid() != 1  || countBoxYNIntegrity() != 1 || checkContactValid() != 1) {
                 Toast.makeText(getContext(), "Answer all questions to proceed", Toast.LENGTH_SHORT).show();
             } else {
@@ -211,28 +209,45 @@ public class Branch1Fragment extends Fragment {
         });
     }
 
-    // updates boxes based on clicks
+    // Fixed method to prevent checkbox disappearing
     private void maintainBoxYNIntegrity() {
-        box5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // Create the listeners first
+        box5Listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    // Temporarily remove listener to prevent infinite loop
+                    box6.setOnCheckedChangeListener(null);
                     box6.setChecked(false);
+                    // Restore listener
+                    box6.setOnCheckedChangeListener(box6Listener);
                     recording = "y";
                 }
             }
-        });
+        };
 
-        box6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        box6Listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    // Temporarily remove listener to prevent infinite loop
+                    box5.setOnCheckedChangeListener(null);
                     box5.setChecked(false);
+                    // Restore listener
+                    box5.setOnCheckedChangeListener(box5Listener);
                     recording = "n";
                 }
             }
-        });
+        };
+
+        // Set the listeners
+        box5.setOnCheckedChangeListener(box5Listener);
+        box6.setOnCheckedChangeListener(box6Listener);
     }
+
+    // Store listeners to restore them
+    private CompoundButton.OnCheckedChangeListener box5Listener;
+    private CompoundButton.OnCheckedChangeListener box6Listener;
 
     // check question answered
     private int countBoxYNIntegrity() {

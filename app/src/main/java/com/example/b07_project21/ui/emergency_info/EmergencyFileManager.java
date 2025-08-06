@@ -4,6 +4,7 @@ import android.provider.DocumentsProvider;
 
 import java.util.ArrayList;
 
+import dataAccess.FileData;
 import dataAccess.FileListener;
 import dataAccess.infoType;
 
@@ -15,7 +16,7 @@ public class EmergencyFileManager implements FileListener {
     }
 
     @Override
-    public void onFilesReceived(infoType type, ArrayList<byte[]> data) {
+    public void onFilesReceived(infoType type, ArrayList<FileData> data) {
         if (data != null) {
 
         }

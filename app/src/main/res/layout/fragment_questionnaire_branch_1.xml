@@ -1,145 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Display for the branch 1 questions page for the questionnaire fragment -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.questionnaire.Branch1Fragment">
+    android:background="@drawable/modern_pink_cream_background">
 
-    <!-- title for the page -->
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="match_parent"
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/branch_questions"
-        android:textSize="24sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- scrollable content area -->
-    <ScrollView
-        android:id="@+id/scroll_content"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/title_text"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavButtonLeft"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/app_logo"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/headerContainer"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainer">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="24dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Q1 -->
             <TextView
                 android:id="@+id/branch1_question_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/which_form_s_of_abuse_are_you_experiencing"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <!-- boxes -->
-            <CheckBox
-                android:id="@+id/checkbox11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/physical"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/branch1_question_1"/>
-            <CheckBox
-                android:id="@+id/checkbox12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/emotional"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox11"/>
-            <CheckBox
-                android:id="@+id/checkbox13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/financial"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox12"/>
-            <CheckBox
-                android:id="@+id/checkbox14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/other"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox13"/>
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="16dp"/>
 
-            <!-- Q2 -->
+            <!-- Checkboxes with proper styling -->
+            <!-- Wrapper for checkbox11 -->
+            <LinearLayout
+                android:id="@+id/checkbox11_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@color/black">
+
+                <CheckBox
+                    android:id="@+id/checkbox11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/physical"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Wrapper for checkbox12 -->
+            <LinearLayout
+                android:id="@+id/checkbox12_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/safety_tip_item_background">
+
+                <CheckBox
+                    android:id="@+id/checkbox12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:background="@null"
+                    android:text="@string/emotional"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <!-- Wrapper for checkbox13 -->
+            <LinearLayout
+                android:id="@+id/checkbox13_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/safety_tip_item_background">
+
+                <CheckBox
+                    android:id="@+id/checkbox13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:background="@null"
+                    android:text="@string/other"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <!-- Wrapper for checkbox14 -->
+            <LinearLayout
+                android:id="@+id/checkbox14_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/safety_tip_item_background">
+
+                <CheckBox
+                    android:id="@+id/checkbox14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:background="@null"
+                    android:text="@string/financial"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <!-- Additional questions and inputs -->
             <TextView
                 android:id="@+id/branch1_question_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:text="@string/are_you_recording_the_incidents_dates_times_details"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Added missing checkbox21 and checkbox22 for Yes/No question -->
+            <!-- Wrapper for checkbox21 (Yes) -->
+            <LinearLayout
+                android:id="@+id/checkbox21_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/are_you_recording_the_incidents_dates_times_details"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/safety_tip_item_background">
+
+                <CheckBox
+                    android:id="@+id/checkbox21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:background="@null"
+                    android:text="@string/yes"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <!-- Wrapper for checkbox22 (No) -->
+            <LinearLayout
+                android:id="@+id/checkbox22_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/safety_tip_item_background">
+
+                <CheckBox
+                    android:id="@+id/checkbox22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_checkbox_selector"
+                    android:background="@null"
+                    android:text="@string/no"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/date_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/date_hint"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox14"/>
-            <!-- boxes -->
-            <CheckBox
-                android:id="@+id/checkbox21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/yes"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/branch1_question_2"/>
-            <CheckBox
-                android:id="@+id/checkbox22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/no"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox21"/>
+                android:textColorHint="@color/hint"
+                android:background="@drawable/edittext_background"
+                android:padding="16dp"
+                android:inputType="date"/>
 
-            <!-- Q3 -->
+            <!-- Added missing contact_textbox -->
             <TextView
                 android:id="@+id/branch1_question_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/name_one_person_you_can_call_immediately_in_an_emergency"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox22"/>
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"/>
+
             <EditText
                 android:id="@+id/contact_textbox"
                 android:layout_width="match_parent"
@@ -147,88 +260,48 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/contact_name"
-                android:inputType="text"
-                android:minHeight="24dp"
-                android:padding="12dp"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
-                app:layout_constraintTop_toBottomOf="@+id/branch1_question_3"/>
+                android:textColorHint="@color/hint"
+                android:background="@drawable/edittext_background"
+                android:padding="16dp"
+                android:inputType="text"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
-    <!-- left button -->
+    <!-- Button Container -->
     <LinearLayout
-        android:id="@+id/bottomNavButtonLeft"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:background="@android:color/transparent"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/back_icon"
-            android:contentDescription="@string/back"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
+        <Button
+            android:id="@+id/bottomNavButtonLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/back"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:gravity="center" />
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
+            android:padding="16dp"
+            android:layout_marginEnd="8dp"/>
 
-    </LinearLayout>
-
-    <!-- right button -->
-    <LinearLayout
-        android:id="@+id/bottomNavButtonRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:background="@android:color/transparent"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/next_icon"
-            android:contentDescription="@string/next"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
+        <Button
+            android:id="@+id/bottomNavButtonRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:gravity="center" />
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background"
+            android:padding="16dp"
+            android:layout_marginStart="8dp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
