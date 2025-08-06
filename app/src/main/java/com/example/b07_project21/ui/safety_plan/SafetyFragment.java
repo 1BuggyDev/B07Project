@@ -67,24 +67,36 @@ public class SafetyFragment extends Fragment implements AccountListener, DataLis
         // set up navigation
         NavController navController = NavHostFragment.findNavController(SafetyFragment.this);
 
-        // set up the adapter for the recycler view
+        // set up the adapter for the recycler view with new card-based layout
         adapter = new RecyclerView.Adapter<tipHolder>() {
             // called to get the recycler view a new tipHolder
             @NonNull
             @Override
             public tipHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                // creates a new TextView and sets padding and font size and color
-                TextView tv = new TextView(parent.getContext());
-                tv.setPadding(16, 8, 8, 16);
-                tv.setTextSize(16);
-                //tv.setTextColor(getResources().getColor(R.color.black));
-                return new tipHolder(tv);  // returns wrapped text in the tips holder
+                // Inflate the new card-based layout
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_safety_tip, parent, false);
+                return new tipHolder(view);
             }
+            
             // displays data at specified position
             @Override
             public void onBindViewHolder(@NonNull tipHolder holder, int position) {
-                holder.textView.setText(tips.get(position));
+                // Set the tip text with bullet points
+                String tipText = tips.get(position);
+                holder.tipTitle.setText("Safety Tip " + (position + 1));
+                
+                // Add bullet points to the tip text
+                String[] sentences = tipText.split("\\. ");
+                StringBuilder bulletedText = new StringBuilder();
+                for (String sentence : sentences) {
+                    if (!sentence.trim().isEmpty()) {
+                        bulletedText.append("• ").append(sentence.trim()).append("\n\n");
+                    }
+                }
+                holder.tipText.setText(bulletedText.toString().trim());
             }
+            
             // gets the size, how many tips need to be displayed
             @Override
             public int getItemCount() {
@@ -394,11 +406,14 @@ public class SafetyFragment extends Fragment implements AccountListener, DataLis
      * Inherits from RecyclerView.ViewHolder superclass
      */
     static class tipHolder extends RecyclerView.ViewHolder {
-        TextView textView;  // displays each tip
+        TextView tipTitle;  // displays each tip title
+        TextView tipText;   // displays each tip content
+        
         // receives the itemView and assigns it accordingly
         public tipHolder(@NonNull View itemView) {
             super(itemView);
-            textView = (TextView) itemView;
+            tipTitle = itemView.findViewById(R.id.tipTitle);
+            tipText = itemView.findViewById(R.id.tipText);
         }
     }
 
