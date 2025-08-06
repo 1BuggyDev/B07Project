@@ -39,6 +39,10 @@
             android:id="@+id/action_to_questionnaire"
             app:destination="@id/nav_questionnaire"
             />
+        <action
+            android:id="@+id/action_to_password_reset"
+            app:destination="@+id/password_reset_menu"
+            />
     </fragment>
     <fragment
         android:id="@+id/pin_login_menu"
@@ -52,6 +56,10 @@
             android:id="@+id/action_to_questionnaire"
             app:destination="@id/nav_questionnaire"
             />
+        <action
+            android:id="@+id/action_to_pin_reset"
+            app:destination="@+id/pin_reset_menu"
+            />
     </fragment>
     <fragment
         android:id="@+id/signup_menu"
@@ -62,6 +70,16 @@
             app:destination="@+id/pin_creation_menu"
             />
     </fragment>
+    <fragment
+        android:id="@+id/password_reset_menu"
+        android:name="com.example.b07_project21.ui.login.PasswordResetFragment"
+        android:label="Password Reset"
+        />
+    <fragment
+        android:id="@+id/pin_reset_menu"
+        android:name="com.example.b07_project21.ui.login.PinResetFragment"
+        android:label="Pin Reset"
+        />
     <fragment
         android:id="@+id/pin_creation_menu"
         android:name="com.example.b07_project21.ui.login.PinCreationFragment"

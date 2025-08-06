@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pin_login_menu"
+    android:id="@+id/pin_reset_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,44 +14,34 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
-            android:layout_height="283dp"
-            android:text="Login with Pin"
+            android:layout_height="wrap_content"
+            android:text="Pin Reset"
             android:textAlignment="center"
             android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/PinEnter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pin:"
-            android:inputType="numberPassword"
-            android:minHeight="48dp" />
-
-        <Button
-            android:id="@+id/SubmitPinButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login" />
-
         <TextView
-            android:id="@+id/PinLoginFailureMessage"
+            android:id="@+id/textView10"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="#FF3E3E" />
+            android:layout_height="104dp"
+            android:text="After clicking the &quot;Pin Reset&quot; button, you can create a new pin after login" />
 
         <Button
-            android:id="@+id/ResetPinButton"
+            android:id="@+id/PinResetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Reset Pin" />
 
+        <TextView
+            android:id="@+id/PinResetMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
