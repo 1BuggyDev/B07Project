@@ -102,6 +102,12 @@
             android:gravity="center"
             android:minHeight="20dp" />
 
+        <Button
+            android:id="@+id/ResetPinButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset Pin" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

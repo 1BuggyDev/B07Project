@@ -12,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.b07_project21.MainActivity;
 import com.example.b07_project21.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -68,8 +69,9 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         FirebaseFirestore.getInstance()
                 .collection("users")
-                .document("devUser123")
+                .document(FirebaseAuth.getInstance()
+                        .getCurrentUser()
+                        .getUid())
                 .collection("reminders");
-        ReminderScheduler.schedule(ctx, nxt);
     }
 }

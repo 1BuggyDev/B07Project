@@ -120,7 +120,11 @@ public class PinManager {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    public static void testFunctionRemovePin(Context context) {
+    /**
+     * Removes the pin data
+     * @param context the current context
+     */
+    public static void removePin(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getPackageName() + "_encrypted_pin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("pin");
