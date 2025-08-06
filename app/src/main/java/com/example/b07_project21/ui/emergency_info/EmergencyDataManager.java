@@ -8,6 +8,7 @@ import dataAccess.Document;
 import dataAccess.EmergencyContact;
 import dataAccess.Medication;
 import dataAccess.SafeLocation;
+import dataAccess.StorageAccess;
 import dataAccess.infoType;
 
 public class EmergencyDataManager implements DataListener {

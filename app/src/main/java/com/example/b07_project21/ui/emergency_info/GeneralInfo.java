@@ -41,8 +41,7 @@ public class GeneralInfo {
                 return new GeneralInfo(medication.getName(), medication.getAmount(), String.valueOf(medication.getDailyFrequency()));
             default:
                 Document document = (Document) obj;
-                return new GeneralInfo(document.getTitle(), null, null);
-//                return new GeneralInfo(document.getTitle(), null, document.getFilePath());
+                return new GeneralInfo(document.getTitle(), document.getFilePath(), document.getDescription());
         }
     }
 
@@ -50,7 +49,11 @@ public class GeneralInfo {
     public Object castTo(infoType type) {
         switch (type) {
             case DOCUMENT:
-                return new Document();
+                Document document = new Document();
+                document.setTitle(first);
+                document.setDescription(second);
+                document.setFilePath(third);
+                return document;
             case CONTACT:
                 EmergencyContact contact = new EmergencyContact();
                 contact.setContactName(first);

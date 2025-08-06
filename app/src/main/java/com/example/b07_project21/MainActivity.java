@@ -32,6 +32,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import com.example.b07_project21.databinding.ActivityMainBinding;
 
+import dataAccess.LoginManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -85,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 return NavigationUI.onNavDestinationSelected(item, navController);
             }
         });
+
+        // For testing purposes, remove later.
+        LoginManager.attemptLogin("maxwang972@gmail.com", "B07Test", new TempLogin());
     }
 
     @Override
@@ -102,22 +107,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void exitToGoogle() {
-    // First, launch Google in browser
-    Intent browserIntent = new Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://www.google.com")
-    );
-    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(browserIntent);
+        // First, launch Google in browser
+        Intent browserIntent = new Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com")
+        );
+        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(browserIntent);
 
-    // Small delay to ensure browser starts before killing app
-    new android.os.Handler().postDelayed(() -> {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAndRemoveTask();
-        } else {
-            finishAffinity();
-        }
-    }, 100);
-}
+        // Small delay to ensure browser starts before killing app
+        new android.os.Handler().postDelayed(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAndRemoveTask();
+            } else {
+                finishAffinity();
+            }
+        }, 100);
+    }
 }
 

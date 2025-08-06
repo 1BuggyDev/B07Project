@@ -35,7 +35,9 @@
     <string name="hint_name">Name</string>
     <string name="hint_relationship">Relationship</string>
     <string name="hint_contact">Contact Info (e.g. Phone Number)</string>
+    <string name="open">Open</string>
     <string name="download">Download</string>
+    <string name="add_file">Add File</string>
 
     <!-- Bottom Buttons -->
     <string name="exit">Exit App</string>

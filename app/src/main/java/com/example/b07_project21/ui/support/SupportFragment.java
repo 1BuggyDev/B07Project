@@ -45,10 +45,10 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySelection.setAdapter(adapter);
         citySelection.setOnItemSelectedListener(this);
-        setCity("Toronto");
+        setCitySpinner("Toronto");
 
         viewModel.updateCity();
-        viewModel.getCity().observe(getViewLifecycleOwner(), newCity -> setCity(newCity));
+        viewModel.getCity().observe(getViewLifecycleOwner(), newCity -> setCitySpinner(newCity));
 
         return binding.getRoot();
     }
@@ -71,9 +71,7 @@ public class SupportFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     /** Sets the spinner to the user's current city from Firebase. */
-    private void setCity(String city) {
-//        viewModel.updateCity();
-//        String city = viewModel.getCity().toString();
+    private void setCitySpinner(String city) {
         if (adapter.getPosition(city) == -1)
             citySelection.setSelection(adapter.getPosition("Toronto"));
         else

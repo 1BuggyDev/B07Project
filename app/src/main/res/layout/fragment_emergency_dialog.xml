@@ -42,6 +42,14 @@
             android:inputType="text"
             android:maxLength="40"
             android:hint="@string/hint_contact"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/emergency_add_file_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="@string/add_file" />-->
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

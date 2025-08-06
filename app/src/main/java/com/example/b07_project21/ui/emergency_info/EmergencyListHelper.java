@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.b07_project21.R;
+
+import java.io.File;
 
 public class EmergencyListHelper {
     /** Construct a view to go inside the list
@@ -19,17 +23,13 @@ public class EmergencyListHelper {
      * @param onEdit what to do when edit button is clicked
      * @param onDelete what to do when delete button is clicked
      */
-    public static View construct(LayoutInflater inflater, android.view.ViewGroup root, GeneralInfo text, Runnable onEdit, Runnable onDownload, Runnable onDelete) {
+    public static View construct(LayoutInflater inflater, android.view.ViewGroup root, GeneralInfo text, Runnable onEdit, Runnable onDelete, Runnable onDownload, Runnable onOpen) {
         View view = inflater.inflate(R.layout.fragment_emergency_list_item, root, false);
         TextView info = view.findViewById(R.id.emergencyInfo);
         ImageButton edit = view.findViewById(R.id.editButton);
+        ImageButton open = view.findViewById(R.id.openButton);
         ImageButton download = view.findViewById(R.id.downloadButton);
         ImageButton remove = view.findViewById(R.id.deleteButton);
-
-        view.setOnClickListener(v -> {
-            // Open file
-//            EmergencyFileHelper.openFile(view.getContext(), );
-        });
 
         SpannableStringBuilder textBuilder = new SpannableStringBuilder();
         if (text.first() != null) {
@@ -43,12 +43,20 @@ public class EmergencyListHelper {
         info.setText(textBuilder);
 
         remove.setOnClickListener(v -> onDelete.run());
+
+        if (onEdit == null) edit.setVisibility(View.GONE);
+        else edit.setOnClickListener(v -> onEdit.run());
+
         if (onDownload == null) download.setVisibility(View.GONE);
-        if (onEdit != null)
-            edit.setOnClickListener(v -> onEdit.run());
-        else
-            edit.setVisibility(View.GONE);
+        else download.setOnClickListener(v -> onDownload.run());
+
+        if (onOpen == null) open.setVisibility(View.GONE);
+        else open.setOnClickListener(v -> onOpen.run());
 
         return view;
+    }
+
+    public static View construct(LayoutInflater inflater, android.view.ViewGroup root, GeneralInfo text, Runnable onEdit, Runnable onDelete) {
+        return construct(inflater, root, text, onEdit, onDelete, null, null);
     }
 }
