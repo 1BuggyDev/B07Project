@@ -31,6 +31,15 @@ public class FirebaseSignupFragment extends Fragment implements AccountListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        //If account has been created, redirect to main
+        //Only accessible when back button is pressed from pin creation menu
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null) {
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.clearBackStack(R.id.enter_menu);
+            navController.navigate(R.id.enter_menu);
+        }
+
         curPassword = "";
         reenter = "";
         binding = FragmentFirebaseSignupBinding.inflate(LayoutInflater.from(getContext()));
