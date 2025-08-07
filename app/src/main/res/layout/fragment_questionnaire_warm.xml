@@ -20,6 +20,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- scrollable content area for page content -->
@@ -49,7 +50,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/which_best_describes_your_situation"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="parent" />
             <!-- boxes -->
@@ -59,9 +61,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/still_in_a_relationship"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/warm_question_1"/>
             <CheckBox
                 android:id="@+id/checkbox2"
@@ -69,9 +78,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/planning_to_leave"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox1"/>
             <CheckBox
                 android:id="@+id/checkbox3"
@@ -79,9 +95,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/post_separation"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox2"/>
 
             <!-- Q2 -->
@@ -93,7 +116,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/what_city_do_you_live_in"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox3"/>
             <!-- dropdown -->
@@ -104,8 +128,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:minHeight="32dp"
+                android:minHeight="48dp"
                 android:spinnerMode="dropdown"
+                android:background="@drawable/spinner_background"
+                android:popupBackground="@color/cream_white"
                 app:layout_constraintTop_toBottomOf="@+id/warm_question_2"/>
 
             <!-- Q3 -->
@@ -117,7 +143,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/which_room_in_your_home_feels_the_safest_if_you_need_to_get_away_quickly"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/city_spinner"/>
             <EditText
@@ -126,13 +153,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/room"
                 android:inputType="text"
-                android:minHeight="24dp"
-                android:padding="12dp"
-                android:textSize="14sp"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/warm_question_3"/>
 
             <!-- Q4 -->
@@ -144,7 +173,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/who_do_you_live_with"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/safe_room_textbox"/>
             <!-- boxes -->
@@ -154,9 +184,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/family"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/warm_question_4"/>
             <CheckBox
                 android:id="@+id/checkbox42"
@@ -164,9 +201,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/roommates"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox41"/>
             <CheckBox
                 android:id="@+id/checkbox43"
@@ -174,9 +218,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/alone"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox42"/>
             <CheckBox
                 android:id="@+id/checkbox44"
@@ -184,9 +235,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/partner"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox43"/>
 
             <!-- Q5 -->
@@ -198,7 +256,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/do_you_have_children"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox44"/>
             <!-- boxes -->
@@ -208,9 +267,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/yes"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/warm_question_5"/>
             <CheckBox
                 android:id="@+id/checkbox52"
@@ -218,9 +284,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/no"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox51"/>
             <TextView
                 android:id="@+id/child_safe_word_text"
@@ -230,8 +303,9 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/enter_a_code_word"
                 android:visibility="gone"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox52"/>
             <EditText
                 android:id="@+id/child_safe_word"
@@ -239,14 +313,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/safe_word"
                 android:visibility="gone"
                 android:inputType="text"
-                android:minHeight="24dp"
-                android:padding="12dp"
-                android:textSize="14sp"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/child_safe_word_text"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -324,5 +400,4 @@
             android:textColor="@android:color/black"
             android:gravity="center" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

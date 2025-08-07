@@ -20,6 +20,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- scrollable content area for the questionnaire -->
@@ -61,9 +62,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="32dp"
                 android:text="@string/safety_planning_description"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="4dp"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/safety_image" />
             <TextView
                 android:id="@+id/safety_paragraph_advice"
@@ -73,9 +78,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/safety_planning_advice"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="4dp"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/safety_paragraph" />
             <TextView
                 android:id="@+id/safety_paragraph_help"
@@ -85,9 +94,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/safety_planning_help"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="4dp"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/safety_paragraph_advice" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

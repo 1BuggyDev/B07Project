@@ -7,7 +7,8 @@
     <color name="pink_cream_deep">#FFD6C7</color>
     <color name="cream_white">#FFF5F0</color>
     <color name="soft_grey">#F5F5F5</color>
-    
+    <color name="box">#fcd5ce</color>
+
     <!-- Legacy colors (keeping for compatibility) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
