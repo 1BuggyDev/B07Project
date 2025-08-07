@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -87,11 +86,54 @@ public class MainActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_exit) {
                 exitToGoogle();
                 return true;
+            } else if (item.getItemId() == R.id.nav_home) {
+                try {
+                    navController.navigate(R.id.nav_home);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_questionnaire) {
+                try {
+                    navController.navigate(R.id.nav_questionnaire);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_support) {
+                try {
+                    navController.navigate(R.id.nav_support);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_safety) {
+                try {
+                    navController.navigate(R.id.nav_safety);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_emergency) {
+                try {
+                    navController.navigate(R.id.nav_emergency);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_notification) {
+                try {
+                    navController.navigate(R.id.nav_notification);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
             } else {
                 return NavigationUI.onNavDestinationSelected(item, navController);
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -107,22 +149,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void exitToGoogle() {
-    // First, launch Google in browser
-    Intent browserIntent = new Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://www.google.com")
-    );
-    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(browserIntent);
+        // First, launch Google in browser
+        Intent browserIntent = new Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com")
+        );
+        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(browserIntent);
 
-    // Small delay to ensure browser starts before killing app
-    new android.os.Handler().postDelayed(() -> {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAndRemoveTask();
-        } else {
-            finishAffinity();
-        }
-    }, 100);
+        // Small delay to ensure browser starts before killing app
+        new android.os.Handler().postDelayed(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAndRemoveTask();
+            } else {
+                finishAffinity();
+            }
+        }, 100);
+    }
 }
-}
-
