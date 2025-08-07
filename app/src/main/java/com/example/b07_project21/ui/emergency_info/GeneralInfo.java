@@ -68,7 +68,7 @@ public class GeneralInfo {
                 Medication medication = new Medication();
                 medication.setName(first);
                 medication.setAmount(second);
-                medication.setDailyFrequency(Integer.parseInt(third)); // NOTE: check valid
+                if (!third.isEmpty()) medication.setDailyFrequency(Integer.parseInt(third));
                 return medication;
             default:
                 return null;
