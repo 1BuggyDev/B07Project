@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signup_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/modern_pink_cream_background">
+
+    <!-- Header Section with Logo and Title -->
+    <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/app_logo"
+            android:contentDescription="@string/app_name"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/signupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium" />
+
+    </LinearLayout>
+
+    <!-- Signup Form Container -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <!-- Email Input Field -->
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/EmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Enter your email address"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edittext_background"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:layout_marginBottom="24dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <!-- Password Input Field -->
+            <TextView
+                android:id="@+id/passwordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/PasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Enter your password"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext_background"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:layout_marginBottom="24dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <!-- Confirm Password Input Field -->
+            <TextView
+                android:id="@+id/confirmPasswordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm Password"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/ReenterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Re-enter your password"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext_background"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <!-- Password Requirements -->
+            <TextView
+                android:id="@+id/passwordRequirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password_requirements"
+                android:textSize="12sp"
+                android:textColor="@color/hint"
+                android:background="@drawable/support_warning_box"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Error Message -->
+            <TextView
+                android:id="@+id/MissingRequirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF1D1D"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:minHeight="20dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Signup Button -->
+            <Button
+                android:id="@+id/SignupButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Create Account"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

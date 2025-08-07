@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Display for the branch 1 questions page for the questionnaire fragment -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.questionnaire.Branch1Fragment">
 
-    <!-- title -->
+    <!-- title for the page -->
     <TextView
         android:id="@+id/title_text"
         android:layout_width="match_parent"
@@ -19,9 +20,10 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Scrollable content area -->
+    <!-- scrollable content area -->
     <ScrollView
         android:id="@+id/scroll_content"
         android:layout_width="match_parent"
@@ -48,8 +50,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/which_form_s_of_abuse_are_you_experiencing"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toTopOf="parent"/>
             <!-- boxes -->
             <CheckBox
@@ -59,8 +62,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/physical"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/branch1_question_1"/>
             <CheckBox
                 android:id="@+id/checkbox12"
@@ -69,8 +78,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/emotional"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox11"/>
             <CheckBox
                 android:id="@+id/checkbox13"
@@ -79,8 +94,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/financial"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox12"/>
             <CheckBox
                 android:id="@+id/checkbox14"
@@ -89,8 +110,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/other"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox13"/>
 
             <!-- Q2 -->
@@ -102,8 +129,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/are_you_recording_the_incidents_dates_times_details"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox14"/>
             <!-- boxes -->
             <CheckBox
@@ -113,8 +141,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/yes"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/branch1_question_2"/>
             <CheckBox
                 android:id="@+id/checkbox22"
@@ -123,8 +157,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/no"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox21"/>
 
             <!-- Q3 -->
@@ -136,8 +176,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/name_one_person_you_can_call_immediately_in_an_emergency"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox22"/>
             <EditText
                 android:id="@+id/contact_textbox"
@@ -145,13 +186,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/contact_name"
                 android:inputType="text"
-                android:minHeight="24dp"
-                android:padding="12dp"
-                android:textSize="14sp"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/branch1_question_3"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

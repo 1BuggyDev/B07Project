@@ -1,18 +1,26 @@
 package com.example.b07_project21;
 
+import android.app.AlarmManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.LinearLayout;
 
+import com.example.b07_project21.databinding.FragmentEnterMenuBinding;
+import com.example.b07_project21.ui.enter_screen.EnterScreenFragment;
 import com.google.android.material.navigation.NavigationView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -82,14 +90,59 @@ public class MainActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_exit) {
                 exitToGoogle();
                 return true;
+            } else if (item.getItemId() == R.id.nav_home) {
+                try {
+                    navController.navigate(R.id.nav_home);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_questionnaire) {
+                try {
+                    navController.navigate(R.id.nav_questionnaire);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_support) {
+                try {
+                    navController.navigate(R.id.nav_support);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_safety) {
+                try {
+                    navController.navigate(R.id.nav_safety);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_emergency) {
+                try {
+                    navController.navigate(R.id.nav_emergency);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (item.getItemId() == R.id.nav_notification) {
+                try {
+                    navController.navigate(R.id.nav_notification);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
             } else {
-                // Handle other navigation items normally
                 return NavigationUI.onNavDestinationSelected(item, navController);
             }
         });
 
-        // For testing purposes, remove later.
-        LoginManager.attemptLogin("maxwang972@gmail.com", "B07Test", new TempLogin());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+            if (!am.canScheduleExactAlarms()) {
+                startActivity(new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM));
+            }
+        }
     }
 
     @Override

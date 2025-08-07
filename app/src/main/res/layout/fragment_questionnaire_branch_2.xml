@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Display for the branch 2 questions page for the questionnaire fragment -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.questionnaire.Branch2Fragment">
 
-    <!-- title -->
+    <!-- title for the page -->
     <TextView
         android:id="@+id/title_text"
         android:layout_width="match_parent"
@@ -19,9 +20,10 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Scrollable content area -->
+    <!-- scrollable content area -->
     <ScrollView
         android:id="@+id/scroll_content"
         android:layout_width="match_parent"
@@ -48,8 +50,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/when_do_you_plan_to_leave"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toTopOf="parent"/>
             <EditText
                 android:id="@+id/day_textbox"
@@ -57,13 +60,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/date_hint"
-                android:inputType="text"
-                android:minHeight="24dp"
                 android:padding="12dp"
-                android:textSize="14sp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/branch2_question_1"/>
 
             <!-- Q2 -->
@@ -75,8 +81,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/do_you_have_a_go_bag_packed_with_essentials"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/day_textbox"/>
             <!-- boxes -->
             <CheckBox
@@ -86,8 +93,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/yes"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/branch2_question_2"/>
             <CheckBox
                 android:id="@+id/checkbox22"
@@ -96,8 +109,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/no"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox21"/>
 
             <!-- Q3 -->
@@ -109,8 +128,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/where_do_you_keep_emergency_cash_or_cards"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox22"/>
             <EditText
                 android:id="@+id/cash_textbox"
@@ -118,13 +138,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/location"
-                android:inputType="text"
-                android:minHeight="24dp"
                 android:padding="12dp"
-                android:textSize="14sp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/branch2_question_3"/>
 
             <!-- Q4 -->
@@ -136,8 +159,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/have_you_identified_a_safe_place_to_stay"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/cash_textbox"/>
             <!-- boxes -->
             <CheckBox
@@ -147,8 +171,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/yes"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/branch2_question_4"/>
             <CheckBox
                 android:id="@+id/checkbox42"
@@ -157,8 +187,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/no"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:button="@drawable/custom_checkbox_selector"
+                android:buttonTint="@color/box"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox41"/>
             <TextView
                 android:id="@+id/safe_place_ask"
@@ -168,8 +204,9 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/enter_the_temporary_shelter_location"
                 android:visibility="gone"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 app:layout_constraintTop_toBottomOf="@+id/checkbox42"/>
             <EditText
                 android:id="@+id/safe_place_text"
@@ -177,14 +214,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/location"
                 android:visibility="gone"
-                android:inputType="text"
-                android:minHeight="24dp"
                 android:padding="12dp"
-                android:textSize="14sp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/hint"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/edittext_background"
                 app:layout_constraintTop_toBottomOf="@+id/safe_place_ask"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

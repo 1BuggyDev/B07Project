@@ -4,7 +4,7 @@ public class FileData {
     private byte[] data;
     private String name;
     private String type;
-
+ 
     public FileData(byte[] data, String name, String type) {
         this.data = data;
         this.name = name;
@@ -18,23 +18,12 @@ public class FileData {
     public void setName(String name) {
         this.name = name;
     }
-
     /**
      * Gets the file extension
      * @return the file extension or the file name if it has no extension
      */
     public String getExtension() {
         return name.substring(name.lastIndexOf('.') + 1);
-    }
-
-    /**
-     * Gets the file name without the extension
-     * @return the file name without the extension or the file name if it has no extension
-     */
-    public String withoutExtension() {
-        if (name.indexOf('.') != -1)
-            return name.substring(0, name.lastIndexOf('.'));
-        return name;
     }
 
     /**

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- 1) Message input -->
+    <EditText
+        android:id="@+id/input_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notification text (optional)"
+        android:inputType="textCapSentences" />
+
+    <!-- 2) Spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- 3) Frequency picker -->
+    <TextView
+        android:id="@+id/label_frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Repeat"
+        style="@style/TextAppearance.Material3.BodyMedium" />
+
+    <Spinner
+        android:id="@+id/spinner_frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/frequency_options"
+        android:prompt="@string/frequency_prompt" />
+
+</LinearLayout>

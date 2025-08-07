@@ -12,6 +12,10 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.b07_project21.MainActivity;
 import com.example.b07_project21.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 
 public class ReminderReceiver extends BroadcastReceiver {
     private static final String CH_ID = "reminders";
@@ -28,15 +32,46 @@ public class ReminderReceiver extends BroadcastReceiver {
         PendingIntent tap = PendingIntent.getActivity(
                 ctx, 0, tapIntent, PendingIntent.FLAG_IMMUTABLE);
 
+        String body = in.getStringExtra("msg");
+        if (body == null || body.isEmpty()) {
+            body = ctx.getString(R.string.notif_generic_body); // fallback
+        }
         NotificationCompat.Builder nb = new NotificationCompat.Builder(ctx, CH_ID)
                 .setSmallIcon(R.drawable.ic_reminder)
                 .setContentTitle(ctx.getString(R.string.notif_generic_title))
-                .setContentText(ctx.getString(R.string.notif_generic_body))
+                .setContentText(body)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body)) // for longer notes
                 .setContentIntent(tap)
                 .setAutoCancel(true);
 
         // there is some issue here, yet it still runs
         NotificationManagerCompat.from(ctx)
                 .notify(in.getStringExtra("id").hashCode(), nb.build());
+
+        /* ── reschedule for repeat types ───────────────────────── */
+        Calendar next = Calendar.getInstance();
+        next.setTimeInMillis(in.getLongExtra("triggerAt", System.currentTimeMillis()));
+
+        String freq = in.getStringExtra("frequency");
+        if (freq == null) freq = "ONCE";      // safety default
+        switch (freq) {
+            case "DAILY":   next.add(Calendar.DAY_OF_YEAR, 1);  break;
+            case "WEEKLY":  next.add(Calendar.WEEK_OF_YEAR, 1); break;
+            case "MONTHLY": next.add(Calendar.MONTH,         1); break;
+            default:        return; // ONCE – nothing more to schedule
+        }
+
+        Reminder nxt = new Reminder(
+                in.getStringExtra("id"),
+                next.getTimeInMillis(),
+                in.getStringExtra("msg"),
+                Reminder.Frequency.valueOf(freq));
+
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(FirebaseAuth.getInstance()
+                        .getCurrentUser()
+                        .getUid())
+                .collection("reminders");
     }
 }

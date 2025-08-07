@@ -206,7 +206,6 @@ public final class StorageAccess {
      * Bubble sort
      * @param data the data to sort
      * @param times an ArrayList containing the metadata creation times
-     * @return data sorted using bubble sort
      */
     protected static <T> void sortByAge(List<T> data, ArrayList<Long> times) {
         for(int i = 0; i < times.size(); i++) {

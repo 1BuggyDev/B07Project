@@ -56,6 +56,13 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
                 .getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
                 .format(r.getTriggerAt());
         h.text.setText(label);
+        String m = r.getMessage();
+        if (m == null || m.isEmpty()) {
+            h.msg.setVisibility(View.GONE);
+        } else {
+            h.msg.setText(m);
+            h.msg.setVisibility(View.VISIBLE);
+        }
         // long-press to edit:
         h.itemView.setOnLongClickListener(v -> {
             if (actionListener != null) {
@@ -66,10 +73,11 @@ public class ReminderAdapter extends ListAdapter<Reminder, ReminderAdapter.VH> {
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView text;
+        TextView text, msg;
         VH(View v) {
             super(v);
             text = v.findViewById(R.id.text_timestamp);
+            msg = v.findViewById(R.id.text_msg);
         }
     }
 

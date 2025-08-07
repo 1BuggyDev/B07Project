@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Solid black box -->
+    <item>
+        <shape android:shape="rectangle">
+            <size
+                android:width="24dp"
+                android:height="24dp"/>
+            <solid android:color="@color/white"/>
+            <corners android:radius="4dp"/>
+        </shape>
+    </item>
+
+    <!-- White checkmark inset -->
+    <item
+        android:top="4dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:bottom="4dp">
+        <vector
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:width="16dp"
+            android:height="16dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24"
+            android:tint="@android:color/white">
+            <!-- Simple check path -->
+            <path
+                android:pathData="M20,6 L9,17 L4,12"
+                android:strokeWidth="2"
+                android:strokeColor="@android:color/white"
+                android:fillColor="@android:color/transparent"/>
+        </vector>
+    </item>
+
+</layer-list>
