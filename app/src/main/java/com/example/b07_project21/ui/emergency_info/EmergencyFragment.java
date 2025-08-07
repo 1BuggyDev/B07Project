@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,10 +21,12 @@ import com.example.b07_project21.R;
 import com.example.b07_project21.databinding.FragmentEmergencyBinding;
 
 import java.io.File;
+import java.io.IOException;
 
 import dataAccess.DatabaseAccess;
 import dataAccess.Document;
 import dataAccess.EmergencyContact;
+import dataAccess.FileData;
 import dataAccess.Medication;
 import dataAccess.SafeLocation;
 import dataAccess.StorageAccess;
@@ -84,17 +85,29 @@ public class EmergencyFragment extends Fragment implements AdapterView.OnItemSel
                     if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                         Intent fileIntent = result.getData();
                         Uri fileUri = fileIntent.getData();
-
-                        String name = EmergencyFileHelper.getUriName(requireContext(), fileUri);
+                        String fileName = EmergencyFileHelper.getUriName(requireContext(), fileUri);
                         File file = EmergencyFileHelper.uriToFile(requireContext(), fileUri);
 
-                        Document document = new Document(name, null, null);
-                        document.generateFilePath();
+                        FileData fileData = null;
+                        try {
+                            fileData = new FileData(EmergencyFileHelper.fileToBytes(file), fileName, null);
+                            fileData.setType(fileData.getExtension());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
 
-                        DatabaseAccess.writeData(infoType.DOCUMENT, document, dataManager);
-                        StorageAccess.uploadFile(infoType.DOCUMENT, document.getFilePath(), file, fileManager);
+                        // Ask for more info in dialog
+                        EmergencyDialogHelper.showDialog(this, infoType.DOCUMENT, "Add Document", new GeneralInfo("Name", null, "Category"), null, fileData);
                     }
                 });
+    }
+
+    /** Asks user for a file to upload. */
+    public void askForDocument() {
+        Intent filePicker = new Intent(Intent.ACTION_GET_CONTENT);
+        filePicker.addCategory(Intent.CATEGORY_OPENABLE);
+        filePicker.setType("*/*");
+        filePickerLauncher.launch(filePicker);
     }
 
     private void setDescription(String desc) {
@@ -145,24 +158,13 @@ public class EmergencyFragment extends Fragment implements AdapterView.OnItemSel
         }
     }
 
-    /** Asks user for a file to upload. */
-    private void askForDocument() {
-        Intent filePicker = new Intent(Intent.ACTION_GET_CONTENT);
-        filePicker.addCategory(Intent.CATEGORY_OPENABLE);
-        filePicker.setType("*/*");
-        filePickerLauncher.launch(filePicker);
-    }
-
     /** Updates specified list with current data */
     public void updateList(infoType type) {
         binding.emergencyContents.removeAllViews();
         switch (type) {
             case DOCUMENT:
                 setDescription(getResources().getString(R.string.document_desc));
-                for (Document document : dataManager.getDocuments()) {
-                    addToList(infoType.DOCUMENT, document);
-//                    StorageAccess.readFiles(infoType.DOCUMENT, document.getFilePath(), fileManager);
-                }
+                for (Document document : dataManager.getDocuments()) addToList(infoType.DOCUMENT, document);
                 break;
             case CONTACT:
                 setDescription(getResources().getString(R.string.contact_desc));
@@ -182,41 +184,53 @@ public class EmergencyFragment extends Fragment implements AdapterView.OnItemSel
     /** Adds specified data to list (contact, location, medication) */
     public void addToList(infoType type, Object data) {
         LinearLayout list = binding.emergencyContents;
-        View item;
+        View item = null;
         Runnable editButton;
         Runnable deleteButton;
         switch (type) {
+            case DOCUMENT:
+                Document document = (Document) data;
+                deleteButton = ()-> delete(infoType.DOCUMENT, document);
+                Runnable onDownload = ()-> {
+                    fileManager.setCurrentFile(document.getTitle());
+                    fileManager.setReadMode("download");
+                    StorageAccess.readFiles(type, document.getFilePath(), fileManager);
+                };
+                Runnable onOpen = ()-> {
+                    fileManager.setCurrentFile(document.getTitle());
+                    fileManager.setReadMode("open");
+                    StorageAccess.readFiles(type, document.getFilePath(), fileManager);
+                };
+                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), null, deleteButton, onDownload, onOpen);
+                break;
             case CONTACT:
                 EmergencyContact contact = (EmergencyContact) data;
                 editButton = ()-> edit(infoType.CONTACT, contact);
                 deleteButton = ()-> delete(infoType.CONTACT, contact);
-                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, null, deleteButton);
+                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, deleteButton);
                 break;
             case LOCATION:
                 SafeLocation location = (SafeLocation) data;
                 editButton = ()-> edit(infoType.LOCATION, location);
                 deleteButton = ()-> delete(infoType.LOCATION, location);
-                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, null, deleteButton);
+                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, deleteButton);
                 break;
             case MEDICATION:
                 Medication medication = (Medication) data;
                 editButton = ()-> edit(infoType.MEDICATION, medication);
                 deleteButton = ()-> delete(infoType.MEDICATION, medication);
-                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, null, deleteButton);
-                break;
-            default: // Document
-                Document document = (Document) data;
-                deleteButton = ()-> {
-                    delete(infoType.DOCUMENT, document);
-                };
-                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), null, null, deleteButton);
+                item = EmergencyListHelper.construct(inflater, list, GeneralInfo.castFrom(type, data), editButton, deleteButton);
                 break;
         }
-        list.addView(item);
+        if (item != null) list.addView(item);
     }
 
-    public EmergencyDataManager getData() {
+    public EmergencyDataManager getDataManager() {
         return dataManager;
+    }
+
+    public EmergencyFileManager getFileManager() {
+        return fileManager;
     }
 
     @Override

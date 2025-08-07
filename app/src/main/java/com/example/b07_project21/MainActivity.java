@@ -40,6 +40,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import com.example.b07_project21.databinding.ActivityMainBinding;
 
+import dataAccess.LoginManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -176,3 +178,4 @@ public class MainActivity extends AppCompatActivity {
         }, 100);
     }
 }
+

@@ -1,42 +1,71 @@
 package com.example.b07_project21.ui.emergency_info;
 
+import android.app.DownloadManager;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import dataAccess.FileData;
 import dataAccess.StorageAccess;
 import dataAccess.infoType;
 
 public class EmergencyFileHelper {
-    public static void openFile(Context context, File file) {
-        if (file == null || !file.exists()) {
-            Toast.makeText(context, "File does not exist", Toast.LENGTH_SHORT).show();
+    /** Opens specified file. */
+    public static void openFile(Context context, FileData fileData) {
+        File file = byteToFile(context, fileData.getData(), fileData.getName()); // /data/user/0/com.example.b07_project21/cache/6.jpg
+        Uri uri = EmergencyFileHelper.fileToUri(context, file); // content://com.example.b07_project21.provider/cache/6.jpg
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, fileData.getType());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(intent);
+    }
+
+    /** Downloads specified file. */
+    public static void downloadFile(Context context, FileData fileData) {
+        ContentResolver contentResolver = context.getContentResolver();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileData.getName());
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, fileData.getType());
+
+        Uri uri = contentResolver.insert(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY), contentValues);
+        if (uri == null) {
+            Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Uri uri = EmergencyFileHelper.fileToUri(context, file);
-
-        // Get type
-        String type = context.getContentResolver().getType(uri);
-        if (type == null) type = "*/*";
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(uri, type);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        if (intent.resolveActivity(context.getPackageManager()) != null)
-            context.startActivity(intent);
-        else
-            Toast.makeText(context, "Cannot open file - no app found", Toast.LENGTH_SHORT).show();
+        try (OutputStream out = contentResolver.openOutputStream(uri)) {
+            InputStream in = new ByteArrayInputStream(fileData.getData());
+            byte[] buffer = new byte[4096];
+            int len;
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+            Toast.makeText(context, "Download Successful", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /** Converts Uri to File. Note Uri has no file name. */
@@ -85,18 +114,32 @@ public class EmergencyFileHelper {
         return name;
     }
 
-//    public static File byteToFile(Context context, byte[] byteFile, String name) {
-//        File file = new File(context.getCacheDir(), name);
-//        try (FileOutputStream fos = new FileOutputStream(file)) {
-//            fos.write(byteFile);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return file;
-//    }
+    public static File byteToFile(Context context, byte[] byteFile, String name) {
+        File file = new File(context.getCacheDir(), name);
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(byteFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+//        System.out.println(file);
+        return file;
+    }
 
-//    public static byte[] pathToBytes(String path, EmergencyFileManager fileManager) {
-//        StorageAccess.readFiles(infoType.DOCUMENT, path, fileManager);
-//    }
+    public static byte[] fileToBytes(File file) throws IOException {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                bos.write(buffer, 0, bytesRead);
+            }
+            fis.close();
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
