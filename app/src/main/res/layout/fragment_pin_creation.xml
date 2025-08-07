@@ -40,13 +40,13 @@
             android:id="@+id/pinDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create a 4-digit pin for secure access"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="8dp"
             android:alpha="0.8"
+            android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:layout_marginTop="8dp" />
+            android:text="Create a 4 or 6 digit pin for secure access"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -80,18 +80,18 @@
             android:id="@+id/Pin"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Enter 4-digit pin"
-            android:inputType="numberPassword"
-            android:maxLength="4"
-            android:background="@drawable/edittext_background"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hint"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_background"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Enter 4 or 6 digit pin"
+            android:inputType="numberPassword"
+            android:maxLength="6"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:textSize="16sp" />
 
         <!-- Confirm Pin Input Field -->
         <TextView
@@ -109,18 +109,18 @@
             android:id="@+id/reenter"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Re-enter 4-digit pin"
-            android:inputType="numberPassword"
-            android:maxLength="4"
-            android:background="@drawable/edittext_background"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hint"
             android:layout_marginBottom="32dp"
+            android:background="@drawable/edittext_background"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Re-enter 4or 6 digit pin"
+            android:inputType="numberPassword"
+            android:maxLength="6"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:textSize="16sp" />
 
         <!-- Create Pin Button -->
         <Button
